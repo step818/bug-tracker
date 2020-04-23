@@ -6,11 +6,11 @@ const toolbarItems = () => {
     <ul>
       <li><ToolbarItem link="/" exact>Home</ToolbarItem></li>
       <li><ToolbarItem link="/projects">Projects</ToolbarItem></li>
-      <li>Add Project</li>
-      <li>Notifications</li>
-      <li>Account</li>
-      <li>Team</li>
-      <li>Add Team Member</li>
+      <li><ToolbarItem link="/addProject">Add Project</ToolbarItem></li>
+      <li><ToolbarItem link="/notifications">Notifications</ToolbarItem></li>
+      <li><ToolbarItem link="/account">Account</ToolbarItem></li>
+      <li><ToolbarItem link="/team">Team</ToolbarItem></li>
+      <li><ToolbarItem link="/addMember">Add Team Member</ToolbarItem></li>
     </ul>
   );
 }

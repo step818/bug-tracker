@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import ProjectList from './ProjectList';
 
 class Projects extends Component {
   render(){
     return(
       <div>
-        Project1 / Project2 / Project 3
+        <ProjectList />
       </div>
     );
   }
