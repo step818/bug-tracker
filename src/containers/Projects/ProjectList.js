@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import ProjectSummary from './ProjectSummary';
 
 const ProjectList = () => {
   return(
     <div>
-      ProjectList
+      Project List:
+      <ProjectSummary />
     </div>
   )
 }

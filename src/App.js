@@ -5,6 +5,10 @@ import Layout from './hoc/Layout/Layout';
 import { Switch, Route } from 'react-router-dom';
 import Projects from './containers/Projects/Projects';
 import AddProject from './containers/Projects/AddProject';
+import Notifications from './containers/Notifications/Notifications';
+import Team from './containers/Team/Team';
+import Account from './containers/Account/Account';
+import AddMember from './containers/Team/AddMember';
 
 function App() {
   return (
@@ -14,6 +18,10 @@ function App() {
         {/* <Auth /> */}
         <Layout>
           <Switch>
+            <Route path="/addMember" component={AddMember} />
+            <Route path="/account" component={Account} />
+            <Route path="/team" component={Team} />
+            <Route path="/notifications" component={Notifications} />
             <Route path="/addProject" component={AddProject} />
             <Route path="/projects" component={Projects} />
             <Route path="/" exact component={Dashboard} />
