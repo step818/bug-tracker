@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 
 class AddProject extends Component {
+  state = {
+    title: "Stephen" 
+  };
+
   render(){
     return(
       <div>
         <h4>Create New Goal</h4>
+        <span>{this.state.title}</span>
         <form onSubmit={this.handleSubmit}>
           <label>Title</label>
           <input type="text" id="title" onChange={this.handleChange} required={true} />

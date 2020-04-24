@@ -9,6 +9,7 @@ import Notifications from './containers/Notifications/Notifications';
 import Team from './containers/Team/Team';
 import Account from './containers/Account/Account';
 import AddMember from './containers/Team/AddMember';
+import ProjectDetails from './containers/Projects/ProjectDetails';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         {/* <Auth /> */}
         <Layout>
           <Switch>
+            <Route path="/project/:id" component={ProjectDetails} />
             <Route path="/addMember" component={AddMember} />
             <Route path="/account" component={Account} />
             <Route path="/team" component={Team} />

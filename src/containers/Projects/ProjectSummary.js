@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ProjectSummary = () => {
+const ProjectSummary = ({project}) => {
   return(
     <div>
-      Project Title, Severity level, Due date, 
+      <p>{project.id}</p><p>{project.name}</p> 
     </div>
   );
 }
