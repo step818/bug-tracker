@@ -1,9 +1,10 @@
 import React from 'react';
 import ToolbarItem from './Item/ToolbarItem';
+import classes from './ToolbarItems.module.css';
 
 const toolbarItems = () => {
   return(
-    <ul>
+    <ul className={classes.ToolbarItems}>
       <li><ToolbarItem link="/" exact>Home</ToolbarItem></li>
       <li><ToolbarItem link="/projects">Projects</ToolbarItem></li>
       <li><ToolbarItem link="/addProject">Add Project</ToolbarItem></li>

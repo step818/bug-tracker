@@ -4,7 +4,9 @@ class Dashboard extends Component {
   render(){
     return(
       <div>
-        Dashboard
+        chart of Issues by priority.
+        chart of Issues by status.
+        chart of Issues by type.
       </div>
     );
   }
