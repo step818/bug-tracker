@@ -25,9 +25,10 @@ const ProfileSchema = new mongoose.Schema({
   githubusername: {
     type: String
   },
-  points: {
-    type: Number
-  },
+  // Points should be separate from profile object
+  // points: {
+  //   type: Number
+  // },
   social: {
     youtube: {
       type: String
