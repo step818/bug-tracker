@@ -160,4 +160,187 @@ router.put('/unlike/:id', auth, async (req, res) => {
   }
 });
 
+//@route  Post api/projects/comment
+//@desc   Comment on a project
+//@access Private
+router.post(
+  '/comment/:id',
+  [
+    auth, 
+    [
+      check('text', 'Text is required')
+      .not()
+      .isEmpty()
+    ]
+  ], 
+  async (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+      const project = await Project.findById(req.params.id);
+
+      const newComment = {
+        text: req.body.text,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        avatar: user.avatar,
+        user: req.user.id
+      };
+
+      project.comments.unshift(newComment);
+
+      await project.save();
+
+      res.json(project.comments);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+});
+
+//@route  Delete api/projects/comment/:id/:comment_id
+//@desc   Delete comment to a project
+//@access Private
+router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
+  try {
+    const project = await Project.findById(req.params.id);
+
+    // Pull out comment
+    const comment = project.comments.find(
+      comment => comment.id === req.params.comment_id
+    );
+
+    // Make sure comment exists
+    if (!comment) {
+      return res.status(404).json({ msg: 'Comment does not exist' });
+    }
+
+    // Check user
+    if (comment.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User not authorized' });
+    }
+
+    // Get remove index
+    const removeIndex = project.comments
+      .map(comment => comment.user.toString())
+      .indexOf(req.user.id);
+
+    project.comments.splice(removeIndex, 1);
+
+    await project.save();
+
+    res.json(project.comments);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//@route  Post api/projects/goal
+//@desc   Post a goal to a project
+//@access Private
+router.post(
+  '/goal/:id',
+  [
+    auth, 
+    [
+      check('title', 'Title is required')
+      .not()
+      .isEmpty(),
+      check('priority', 'Priority is required')
+      .not()
+      .isEmpty()
+    ]
+  ], 
+  async (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+      const project = await Project.findById(req.params.id);
+
+      const newGoal = {
+        title: req.body.title,
+        priority: req.body.priority,
+        description: req.body.description,
+        status: req.body.status,
+        user: req.user.id
+      };
+
+      if (!project) {
+        return res.status(404).json({ msg: 'Project not found '});
+      }
+  
+      // Check user of project is creating goal
+      if (project.user.toString() !== req.user.id) {
+        return res.status(401).json({ msg: 'User not authorized to add goals to projects of other users' });
+      }
+
+      project.goals.unshift(newGoal);
+
+      await project.save();
+
+      res.json(project.goals);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+});
+
+//@route  Post api/projects/team
+//@desc   Post team @todo Later make it so user INVITES team
+//@access Private
+router.post(
+  '/team/:id',
+  [
+    auth
+  ], 
+  async (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+      const project = await Project.findById(req.params.id);
+
+      const newTeam = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        role: req.body.role,
+        user: req.user.id
+      };
+
+      if (!project) {
+        return res.status(404).json({ msg: 'Project not found '});
+      }
+  
+      // Check user of project is creating team
+      if (project.user.toString() !== req.user.id) {
+        return res.status(401).json({ msg: 'User not authorized to add goals to projects of other users' });
+      }
+
+      project.team.unshift(newTeam);
+
+      await project.save();
+
+      res.json(project.team);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+});
+
+
 module.exports = router;
