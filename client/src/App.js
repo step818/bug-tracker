@@ -10,6 +10,9 @@ import Team from './containers/Team/Team';
 import Account from './containers/Account/Account';
 import AddMember from './containers/Team/AddMember';
 import ProjectDetails from './containers/Projects/ProjectDetails';
+import Login from './containers/Auth/Login';
+import Register from './containers/Auth/Register';
+import Landing from './components/Landing/Landing';
 
 function App() {
   return (
@@ -18,7 +21,10 @@ function App() {
           you have authentication and api set up. */}
         {/* <Auth /> */}
         <Layout>
+          
           <Switch>
+            <Route path='/register' component={Register} />
+            <Route path='/login' component={Login} />
             <Route path="/project/:id" component={ProjectDetails} />
             <Route path="/addMember" component={AddMember} />
             <Route path="/account" component={Account} />
@@ -26,9 +32,9 @@ function App() {
             <Route path="/notifications" component={Notifications} />
             <Route path="/addProject" component={AddProject} />
             <Route path="/projects" component={Projects} />
-            <Route path="/" exact component={Dashboard} />
+            <Route path="/dashboard" exact component={Dashboard} />
           </Switch>
-          
+          <Route path='/' exact component={Landing} />
         </Layout>
           
         
