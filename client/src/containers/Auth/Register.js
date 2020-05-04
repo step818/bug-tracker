@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+// import axios from 'axios';
+
 
 const Register = () => {
-  // Set state useing hooks (useState)
+  // Set state using hooks (useState)
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -14,12 +17,33 @@ const Register = () => {
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
       console.log('Passwords do not match');
     } else {
       console.log(formData);
+      // const newUser = {
+      //   firstName,
+      //   lastName,
+      //   email,
+      //   password
+      // }
+
+      // try {
+      //   const config = {
+      //     headers: {
+      //       'Content-Type': 'application/json'
+      //     }
+      //   }
+
+      //   const body = JSON.stringify(newUser);
+        
+      //   const res = await axios.post('/api/users', body, config);
+      //   console.log(res.data.token);
+      // } catch (err) {
+      //   console.error(err.response.data);
+      // }
     }
   }
 
@@ -85,10 +109,10 @@ const Register = () => {
         <input type="submit" className="btn btn-primary" value="Register" />
       </form>
       <p className="my-1">
-        Already have an account? <a href="login.html">Sign In</a>
+        Already have an account? <Link to="/login">Sign in</Link>
       </p>
     </div>
   )
 }
 
-export default Register
+export default Register;
