@@ -13,6 +13,7 @@ import ProjectDetails from './containers/Projects/ProjectDetails';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
 import Landing from './components/Landing/Landing';
+import Alert from './hoc/Layout/Alert';
 // Redux
 import { Provider} from 'react-redux';
 import store from './store';
@@ -24,7 +25,7 @@ function App() {
           you have authentication and api set up. */}
         {/* <Auth /> */}
         <Layout>
-          
+        <Alert />
           <Switch>
             <Route path='/register' component={Register} />
             <Route path='/login' component={Login} />
@@ -39,7 +40,6 @@ function App() {
           </Switch>
           <Route path='/' exact component={Landing} />
         </Layout>
-          
         
     
     </Provider>
