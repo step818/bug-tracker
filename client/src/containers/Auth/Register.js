@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { setAlert } from '../../actions/alert';
 // import axios from 'axios';
 
 
-const Register = () => {
+const Register = (props) => {
   // Set state using hooks (useState)
   const [formData, setFormData] = useState({
     firstName: '',
@@ -20,7 +22,7 @@ const Register = () => {
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-      console.log('Passwords do not match');
+      props.setAlert('Passwords do not match', 'danger');
     } else {
       console.log(formData);
       // const newUser = {
@@ -112,7 +114,7 @@ const Register = () => {
         Already have an account? <Link to="/login">Sign in</Link>
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default Register;
+export default connect(null, { setAlert })(Register);

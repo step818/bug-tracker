@@ -13,10 +13,13 @@ import ProjectDetails from './containers/Projects/ProjectDetails';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
 import Landing from './components/Landing/Landing';
+// Redux
+import { Provider} from 'react-redux';
+import store from './store';
 
 function App() {
   return (
-    <div>
+    <Provider store={store} >
         {/* Auth WILL be a parent of the Dashboard when
           you have authentication and api set up. */}
         {/* <Auth /> */}
@@ -38,7 +41,8 @@ function App() {
         </Layout>
           
         
-    </div>
+    
+    </Provider>
   );
 }
 
