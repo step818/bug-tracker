@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import Auth from './containers/Auth/Auth';
 import Dashboard from './containers/Dashboard/Dashboard';
 import Layout from './hoc/Layout/Layout';
@@ -17,13 +17,21 @@ import Alert from './hoc/Layout/Alert';
 // Redux
 import { Provider} from 'react-redux';
 import store from './store';
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
 
-function App() {
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
+const App = () => {
+   
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+
   return (
     <Provider store={store} >
-        {/* Auth WILL be a parent of the Dashboard when
-          you have authentication and api set up. */}
-        {/* <Auth /> */}
         <Layout>
         <Alert />
           <Switch>
@@ -40,8 +48,6 @@ function App() {
           </Switch>
           <Route path='/' exact component={Landing} />
         </Layout>
-        
-    
     </Provider>
   );
 }

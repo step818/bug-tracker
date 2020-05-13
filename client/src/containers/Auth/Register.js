@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
 
-const Register = ({ setAlert, register }) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
   // Set state using hooks (useState)
   const [formData, setFormData] = useState({
     firstName: '',
@@ -31,6 +31,12 @@ const Register = ({ setAlert, register }) => {
     }
   };
 
+  if (isAuthenticated) {
+    return(
+      <Redirect to="/dashboard" />
+    );
+  }
+
   return (
     <div>
       <h1 className="large text-primary">Sign Up</h1>
@@ -49,7 +55,7 @@ const Register = ({ setAlert, register }) => {
         <div className="form-group">
           <input 
             type="text" 
-            placeholder=" Last Name" 
+            placeholder="Last Name" 
             name="lastName" 
             value={lastName}
             onChange={e => onChange(e)}
@@ -65,10 +71,10 @@ const Register = ({ setAlert, register }) => {
             onChange={e => onChange(e)}
             // required
           />
-          <small className="form-text"
+          {/* <small className="form-text"
             >This site uses Gravatar so if you want a profile image, use a
             Gravatar email</small
-          >
+          > */}
         </div>
         <div className="form-group">
           <input
@@ -101,10 +107,15 @@ const Register = ({ setAlert, register }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
 };
 
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { setAlert, register }
 )(Register);
