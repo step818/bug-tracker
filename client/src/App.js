@@ -14,6 +14,7 @@ import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
 import Landing from './components/Landing/Landing';
 import Alert from './hoc/Layout/Alert';
+import PrivateRoute from './components/routing/PrivateRoute';
 // Redux
 import { Provider} from 'react-redux';
 import store from './store';
@@ -37,14 +38,14 @@ const App = () => {
           <Switch>
             <Route path='/register' component={Register} />
             <Route path='/login' component={Login} />
-            <Route path="/project/:id" component={ProjectDetails} />
-            <Route path="/addMember" component={AddMember} />
-            <Route path="/account" component={Account} />
-            <Route path="/team" component={Team} />
-            <Route path="/notifications" component={Notifications} />
-            <Route path="/addProject" component={AddProject} />
-            <Route path="/projects" component={Projects} />
-            <Route path="/dashboard" exact component={Dashboard} />
+            <PrivateRoute path="/project/:id" component={ProjectDetails} />
+            <PrivateRoute path="/addMember" component={AddMember} />
+            <PrivateRoute path="/account" component={Account} />
+            <PrivateRoute path="/team" component={Team} />
+            <PrivateRoute path="/notifications" component={Notifications} />
+            <PrivateRoute path="/addProject" component={AddProject} />
+            <PrivateRoute path="/projects" component={Projects} />
+            <PrivateRoute path="/dashboard" exact component={Dashboard} />
           </Switch>
           <Route path='/' exact component={Landing} />
         </Layout>
