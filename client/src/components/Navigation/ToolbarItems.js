@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ToolbarItem from './Item/ToolbarItem';
 import classes from './ToolbarItems.module.css';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../../actions/auth';
 
-const toolbarItems = () => {
-  return(
-    <ul className={classes.ToolbarItems}>
+const toolbarItems = ({auth: { isAuthenticated, loading }, logout}) => {
+  const authLinks = (
+    <ul>
       <li><ToolbarItem link="/dashboard" exact>Home</ToolbarItem></li>
       <li><ToolbarItem link="/projects">Projects</ToolbarItem></li>
       <li><ToolbarItem link="/addProject">Add Project</ToolbarItem></li>
@@ -12,10 +15,31 @@ const toolbarItems = () => {
       <li><ToolbarItem link="/account">Account</ToolbarItem></li>
       <li><ToolbarItem link="/team">Team</ToolbarItem></li>
       <li><ToolbarItem link="/addMember">Add Team Member</ToolbarItem></li>
+      <li><a onClick={logout}>Log Out</a></li>
+    </ul>
+  );
+
+  const guestLinks = (
+    <ul>
       <li><ToolbarItem link='/login'>Log In</ToolbarItem></li>
       <li><ToolbarItem link='/register'>Register</ToolbarItem></li>
     </ul>
   );
+
+  return (
+    <div>
+      {!loading && (<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>)}
+    </div>
+  );
+};
+
+toolbarItems.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 }
 
-export default toolbarItems;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { logout })(toolbarItems);
