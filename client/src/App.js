@@ -15,6 +15,7 @@ import Register from './containers/Auth/Register';
 import Landing from './components/Landing/Landing';
 import Alert from './hoc/Layout/Alert';
 import PrivateRoute from './components/routing/PrivateRoute';
+import CreateProfile from './components/ProfileForms/CreateProfile';
 // Redux
 import { Provider} from 'react-redux';
 import store from './store';
@@ -45,6 +46,7 @@ const App = () => {
             <PrivateRoute path="/notifications" component={Notifications} />
             <PrivateRoute path="/addProject" component={AddProject} />
             <PrivateRoute path="/projects" component={Projects} />
+            <PrivateRoute path="/create-profile" component={CreateProfile} />
             <PrivateRoute path="/dashboard" exact component={Dashboard} />
           </Switch>
           <Route path='/' exact component={Landing} />
