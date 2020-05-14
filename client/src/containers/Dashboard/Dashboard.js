@@ -1,18 +1,42 @@
-import React, { Component } from 'react';
+import React, { useEffect, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getCurrentProfile } from '../../actions/profile';
+import Spinner from '../../hoc/Layout/Spinner';
 
-class Dashboard extends Component {
-  render(){
-    return(
-      <div>
-        chart of Issues by priority.
-        chart of Issues by status.
-        chart of Issues by type.
-      </div>
-    );
-  }
+const Dashboard = ({ auth, getCurrentProfile, profile }) => { 
+  useEffect(() => {
+    getCurrentProfile();
+  }, []);
+
+  return profile.loading && profile.profile === null ? (
+    <Spinner /> 
+  ) : (
+    <Fragment>
+      <h1>Dashboard</h1>
+      <p>Welcome {auth.user && auth.user.firstName}</p>
+      {profile.profile !== null ? (
+        <Fragment>has</Fragment>
+      ) : (
+        <Fragment>
+            <p>You have not yet set up a profile, please add some info.</p>
+            <Link to='create-profile'>Create Profile</Link>
+        </Fragment>
+      )}
+    </Fragment>
+  );
 };
 
-Dashboard.propTypes = {};
+Dashboard.propTypes = {
+  auth: PropTypes.object.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired
+};
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  profile: state.profile
+});
+
+export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
