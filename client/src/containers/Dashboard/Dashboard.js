@@ -9,7 +9,7 @@ import DashboardActions from './DashboardActions';
 const Dashboard = ({ auth, getCurrentProfile, deleteAccount, profile: { profile, loading } }) => { 
   useEffect(() => {
     getCurrentProfile();
-  }, []);
+  }, [getCurrentProfile]);
 
   return loading && profile === null ? (
     <Spinner /> 
@@ -39,6 +39,11 @@ const Dashboard = ({ auth, getCurrentProfile, deleteAccount, profile: { profile,
         <Fragment>
             <p>You have not yet set up a profile, please add some info.</p>
             <Link to='/create-profile'>Create Profile</Link>
+            <div>
+              <button onClick={() => deleteAccount()}>
+                <i>Delete My Account</i>
+              </button>
+            </div>
         </Fragment>
       )}
     </Fragment>

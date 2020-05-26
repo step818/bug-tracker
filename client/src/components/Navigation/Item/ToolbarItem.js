@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import classes from './ToolbarItem.module.css';
 
 const toolbarItem = (props) => (
-  <div className={classes.ToolbarItem}>
+  <div>
     <NavLink to={props.link} path={props.exact} activeClassName={classes.active} >
       {props.children}
     </NavLink>

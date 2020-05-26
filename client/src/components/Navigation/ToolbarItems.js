@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import ToolbarItem from './Item/ToolbarItem';
-import classes from './ToolbarItems.module.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
