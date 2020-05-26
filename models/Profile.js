@@ -8,6 +8,9 @@ const ProfileSchema = new mongoose.Schema({
   company: {
     type: String
   },
+  // points: {
+  //   type: Number
+  // },
   location: {
     type: String
   },
@@ -25,10 +28,6 @@ const ProfileSchema = new mongoose.Schema({
   githubusername: {
     type: String
   },
-  // Points should be separate from profile object
-  // points: {
-  //   type: Number
-  // },
   social: {
     youtube: {
       type: String

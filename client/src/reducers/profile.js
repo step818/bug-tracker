@@ -15,8 +15,8 @@ export default function(state = initialState, action) {
     case GET_PROFILE:
       return {
         ...state,
-        profile: payload,
-        loading: false
+        loading: false,
+        profile: payload
       };
     case GET_PROFILES:
       return {

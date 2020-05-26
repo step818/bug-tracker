@@ -4,21 +4,25 @@ import { connect } from 'react-redux';
 import Spinner from '../../hoc/Layout/Spinner';
 import { getProfileById } from '../../actions/profile';
 import { Link } from 'react-router-dom';
+import ProfileTop from './ProfileTop';
 
 
 const Profile = ({ getProfileById, profile: { loading, profile }, auth, match}) => {
   useEffect(() => {
     getProfileById(match.params.id);
-  }, [getProfileById])
+  }, [getProfileById, match.params.id])
 
   return (
     <Fragment>
       {profile===null || loading ? <Spinner/> : 
         <Fragment>
-          {profile.location}
-          {profile.company}
+          <div>
+            <ProfileTop profile={profile} />
+          </div>
           <Link to="/profiles">Back to Profiles</Link>
-          {auth.isAuthenticated && !auth.loading && auth.user._id === profile.user._id && <Link to="/edit-profile">Edit Profile</Link>}
+          {auth.isAuthenticated && !auth.loading && 
+          auth.user._id === profile.user._id && 
+          <Link to="/edit-profile">Edit Profile</Link>}
         </Fragment>}
     </Fragment>
   );
