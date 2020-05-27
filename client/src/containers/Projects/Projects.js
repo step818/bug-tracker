@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../../hoc/Layout/Spinner';
 import { getProjects } from '../../actions/project';
+import ProjectSummary from './ProjectSummary';
 
 const Projects = ({ project: { projects, loading }, getProjects }) => {
   useEffect(()=> {
@@ -10,9 +11,24 @@ const Projects = ({ project: { projects, loading }, getProjects }) => {
   },[getProjects]);
 
   return (
-    <div>
-      Projects
-    </div>
+    (projects === null || loading ? ( 
+      <Spinner /> 
+      ) : (
+      <Fragment>
+        <h1>Projects</h1>
+        <p>Welcome to the community</p>
+        <div>
+          {projects.map(proj => (
+            <ProjectSummary project={proj}></ProjectSummary>
+            // <div key={proj._id}>
+            //   <p>Text: {proj.lastName}</p>
+            //  <p> Likes: {proj.likes}</p>
+            // </div>
+          ))}
+        </div>
+        {/* Add Project */}
+      </Fragment>)
+    )
   )
 }
 
