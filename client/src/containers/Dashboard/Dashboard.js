@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 import Spinner from '../../hoc/Layout/Spinner';
 import DashboardActions from './DashboardActions';
+import ProfileTop from '../../components/profile/ProfileTop';
 
 const Dashboard = ({ auth, getCurrentProfile, deleteAccount, profile: { profile, loading } }) => { 
   useEffect(() => {
@@ -16,16 +17,12 @@ const Dashboard = ({ auth, getCurrentProfile, deleteAccount, profile: { profile,
   ) : (
     <Fragment>
       <h1>Dashboard</h1>
-      <img
-        class="round-img my-1"
-        src={auth.user.avatar}
-        alt=""
-      />
       <p>Welcome {auth.user && auth.user.firstName}</p>
       {profile !== null ? (
         <Fragment>
           <DashboardActions/>
-          <h3>Bio</h3>
+          <ProfileTop profile={profile} />
+          {/* <h3>Bio</h3>
           <p>{profile.bio}</p>
           <h3>Company</h3>
           <p>{profile.company}</p>
@@ -33,7 +30,7 @@ const Dashboard = ({ auth, getCurrentProfile, deleteAccount, profile: { profile,
           <p>{profile.skills.map(skill => (
             <p>
               {skill}</p>
-          ))}</p>
+          ))}</p> */}
           <div>
             <button onClick={() => deleteAccount()}>
               <i>Delete My Account</i>

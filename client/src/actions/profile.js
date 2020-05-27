@@ -10,7 +10,7 @@ import {
   GET_REPOS
 } from './types';
 
-// Get current users profile
+// Get current user's profile
 export const getCurrentProfile = () => async dispatch => {
   try {
     const res = await axios.get('/api/profile/me');

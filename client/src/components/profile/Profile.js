@@ -8,7 +8,7 @@ import ProfileTop from './ProfileTop';
 import ProfileGithub from './ProfileGithub';
 
 
-const Profile = ({ getProfileById, profile: { loading, profile }, auth, match}) => {
+const Profile = ({ getProfileById, profile: { loading, profile, points }, auth, match}) => {
   useEffect(() => {
     getProfileById(match.params.id);
   }, [getProfileById, match.params.id])
@@ -19,6 +19,7 @@ const Profile = ({ getProfileById, profile: { loading, profile }, auth, match}) 
         <Fragment>
           <div>
             <ProfileTop profile={profile} />
+            <p>Points: {points}</p>
           </div>
           <Link to="/profiles">Back to Profiles</Link>
 

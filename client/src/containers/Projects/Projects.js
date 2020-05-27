@@ -1,33 +1,28 @@
-import React, { Component } from 'react';
-import ProjectList from './ProjectList';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Spinner from '../../hoc/Layout/Spinner';
+import { getProjects } from '../../actions/project';
 
-class Projects extends Component {
-  state = {
-    projects: [{
-      id: 0,
-      name: "Money Tree Growth"
-    },{
-      id: 1,
-      name: "Rise to the top"
-    },{
-      id: 2,
-      name: "Physical Health"
-    },{
-      id: 3,
-      name: "One with nature"
-    }]
-  }
-  render(){
-    const { projects } = this.state;
-    return(
-      <div>
-        <ProjectList projects={projects} />
-        
-        <Link to="/addProject">Add Project</Link>
-      </div>
-    );
-  }
-};
+const Projects = ({ project: { projects, loading }, getProjects }) => {
+  useEffect(()=> {
+    getProjects();
+  },[getProjects]);
 
-export default Projects;
+  return (
+    <div>
+      Projects
+    </div>
+  )
+}
+
+Projects.propTypes = {
+  project: PropTypes.object.isRequired,
+  getProjects: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+  project: state.project
+});
+
+export default connect(mapStateToProps, { getProjects })(Projects);

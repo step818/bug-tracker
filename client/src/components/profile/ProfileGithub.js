@@ -22,6 +22,7 @@ const ProfileGithub = ({ username, getGithubRepos, repos, loading }) => {
                 </a>
               </h4>
               <p>{repo.description}</p>
+              <p>{repo.language}</p>
               </div>
               <div>
                 <ul>

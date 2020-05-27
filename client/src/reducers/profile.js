@@ -2,6 +2,7 @@ import { GET_PROFILE, GET_PROFILES, GET_REPOS, PROFILE_ERROR, CLEAR_PROFILE } fr
 
 const initialState = {
   profile: null,
+  points: 69,
   profiles: [],
   repos: [],
   loading: true,
