@@ -16,6 +16,11 @@ const Dashboard = ({ auth, getCurrentProfile, deleteAccount, profile: { profile,
   ) : (
     <Fragment>
       <h1>Dashboard</h1>
+      <img
+        class="round-img my-1"
+        src={auth.user.avatar}
+        alt=""
+      />
       <p>Welcome {auth.user && auth.user.firstName}</p>
       {profile !== null ? (
         <Fragment>
