@@ -3,6 +3,7 @@ import { setAlert } from './alert';
 
 import {
   GET_PROJECTS,
+  GET_PROJECT,
   PROJECT_ERROR,
   UPDATE_LIKES
 } from './types';
@@ -14,6 +15,23 @@ export const getProjects = () => async dispatch => {
 
     dispatch({
       type: GET_PROJECTS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PROJECT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Get project by ID
+export const getProjectById = id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/projects/${id}`);
+
+    dispatch({
+      type: GET_PROJECT,
       payload: res.data
     });
   } catch (err) {

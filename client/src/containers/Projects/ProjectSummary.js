@@ -36,6 +36,12 @@ const ProjectSummary = ({
               <span>{comments.length}</span>
             )}
           </Link>
+          <Link to={`/goal/${_id}`}>
+            Goals <span>{goals.length}</span>
+          </Link>
+          <Link to={'/team'}>
+            Team <span>{team.length}</span>
+          </Link>
         {!auth.loading && user === auth.user._id && (
           <button type='button'>
             Delete comment

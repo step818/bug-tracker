@@ -1,5 +1,6 @@
 import {
   GET_PROJECTS,
+  GET_PROJECT,
   PROJECT_ERROR,
   UPDATE_LIKES
 } from '../actions/types';
@@ -19,6 +20,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         projects: payload,
+        loading: false
+      };
+    case GET_PROJECT:
+      return {
+        ...state,
+        project: payload,
         loading: false
       };
     case UPDATE_LIKES:
