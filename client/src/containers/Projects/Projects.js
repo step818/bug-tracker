@@ -5,7 +5,7 @@ import Spinner from '../../hoc/Layout/Spinner';
 import { getProjects } from '../../actions/project';
 import ProjectSummary from './ProjectSummary';
 
-const Projects = ({ project: { projects, loading }, getProjects }) => {
+const Projects = ({ project: { projects, loading }, getProjects, auth }) => {
   useEffect(()=> {
     getProjects();
   },[getProjects]);
@@ -18,13 +18,18 @@ const Projects = ({ project: { projects, loading }, getProjects }) => {
         <h1>Projects</h1>
         <p>Welcome to the community</p>
         <div>
-          {projects.map(proj => (
-            <ProjectSummary project={proj}></ProjectSummary>
-            // <div key={proj._id}>
-            //   <p>Text: {proj.lastName}</p>
-            //  <p> Likes: {proj.likes}</p>
-            // </div>
-          ))}
+          {projects.map(proj => {
+            if(proj.user === auth.user._id) {
+            return(
+              <ProjectSummary project={proj}></ProjectSummary>
+              // <div key={proj._id}>
+              //   <p>Text: {proj.lastName}</p>
+              //  <p> Likes: {proj.likes}</p>
+              // </div>)
+            );} else {
+              return(<div></div>);
+            }
+        })}
         </div>
         {/* Add Project */}
       </Fragment>)
@@ -34,11 +39,13 @@ const Projects = ({ project: { projects, loading }, getProjects }) => {
 
 Projects.propTypes = {
   project: PropTypes.object.isRequired,
-  getProjects: PropTypes.func.isRequired
+  getProjects: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-  project: state.project
+  project: state.project,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { getProjects })(Projects);

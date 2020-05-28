@@ -10,6 +10,9 @@ const ProjectSchema = new Schema({
     type: String,
     required: true
   },
+  description: {
+    type: String
+  },
   firstName: {
     type: String
   },

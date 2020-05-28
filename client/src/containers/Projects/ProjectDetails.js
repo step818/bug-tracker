@@ -21,7 +21,17 @@ const ProjectDetails = ({
       <Fragment>
         <h2>Project Details</h2>
         <p>{project.text}</p>
+        <p>Description: {project.description}</p>
         <p>{project.date}</p>
+        <h3>Comments</h3>
+        <p>{project.comments.length}</p>
+        {project.comments.length > 0 && project.comments.map(comment => (
+          <Fragment key={comment._id}>
+            <p>{comment.text}</p>
+            <p>by: {comment.firstName} {comment.lastName}</p>
+            <p>on: {comment.date}</p>
+          </Fragment>
+        ))}
       </Fragment>
       )
     )

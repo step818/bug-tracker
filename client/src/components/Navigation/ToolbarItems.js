@@ -12,7 +12,7 @@ const toolbarItems = ({auth: { isAuthenticated, loading }, logout}) => {
       <li><ToolbarItem link="/addProject">Add Project</ToolbarItem></li>
       <li><ToolbarItem link="/notifications">Notifications</ToolbarItem></li>
       <li><ToolbarItem link="/account">Account</ToolbarItem></li>
-      <li><ToolbarItem link="/profiles">Accomplishers</ToolbarItem></li>
+      <li><ToolbarItem link="/profiles">Profiles</ToolbarItem></li>
       <li><ToolbarItem link="/addMember">Add Team Member</ToolbarItem></li>
       <li><a onClick={logout} href='#!'>Log Out</a></li>
     </ul>

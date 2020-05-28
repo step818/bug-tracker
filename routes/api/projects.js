@@ -32,6 +32,7 @@ router.post(
 
       const newProject = new Project ({
         text: req.body.text,
+        description: req.body.description,
         firstName: user.firstName,
         lastName: user.lastName,
         avatar: user.avatar,
