@@ -3,13 +3,16 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 // import Moment from 'react-moment';
 import { connect } from 'react-redux';
+import { addLike, removeLike } from '../../actions/project';
 
 const ProjectSummary = ({
+  addLike, removeLike,
   auth, project: { 
     _id, text, firstName, lastName, avatar, user, date, 
     likes, goals, team, comments 
   }
 }) => {
+
   return(
     <Fragment>
       <div>
@@ -21,11 +24,11 @@ const ProjectSummary = ({
       <div>
         <p>{text}</p>
         <p>Posted on {date}</p>
-        <button type='button'>
+        <button type='button' onClick={e => addLike(_id)}>
           Like {likes.length > 0 && (
           <span>{likes.length}</span>)}
         </button>
-        <button type='button'>
+        <button type='button' onClick={e => removeLike(_id)}>
           Remove like
         </button>
           <Link to={`/project/${_id}`}>
@@ -46,7 +49,9 @@ const ProjectSummary = ({
 
 ProjectSummary.propTypes = {
   project: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  addLike: PropTypes.func.isRequired,
+  removeLike: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -54,4 +59,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, {})(ProjectSummary);
+export default connect(mapStateToProps, { addLike, removeLike })(ProjectSummary);

@@ -1,6 +1,7 @@
 import {
   GET_PROJECTS,
-  PROJECT_ERROR
+  PROJECT_ERROR,
+  UPDATE_LIKES
 } from '../actions/types';
 
 const initialState = {
@@ -18,6 +19,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         projects: payload,
+        loading: false
+      };
+    case UPDATE_LIKES:
+      return {
+        ...state,
+        projects: state.projects.map(
+          proj => proj._id === payload.projId ? {
+            ...proj, 
+            likes: payload.likes
+          } : proj),
         loading: false
       };
     case PROJECT_ERROR:

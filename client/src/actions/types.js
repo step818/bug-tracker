@@ -17,3 +17,4 @@ export const GET_PROFILES = 'GET_PROFILES';
 export const GET_REPOS = 'GET_REPOS';
 export const GET_PROJECTS = 'GET_PROJECTS';
 export const PROJECT_ERROR = 'PROJECT_ERROR';
+export const UPDATE_LIKES = 'UPDATE_LIKES';
