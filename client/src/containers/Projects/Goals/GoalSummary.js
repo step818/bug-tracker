@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 const GoalSummary = ({ userId, auth, goal: { date, _id, title, priority, description, status, user } }) => {
   return (

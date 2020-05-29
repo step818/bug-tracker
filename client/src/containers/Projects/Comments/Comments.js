@@ -17,11 +17,15 @@ const Comments = ({ project: {project, loading}, getProjectById, match }) => {
         <Fragment>
           <h1>Comments</h1>
           <div>
-          {project.comments.map(comment => {
-            return (
-              <CommentSummary comment={comment} userId={project.user} />
-            );
-          })}
+          {project.comments.length > 0 ? (
+            project.comments.map(comment => {
+              return (
+                <CommentSummary comment={comment} userId={project.user} />
+              );
+            })
+          ) : (
+            <div>No comments to display</div>
+          )}
         </div>
         </Fragment>
       ))
