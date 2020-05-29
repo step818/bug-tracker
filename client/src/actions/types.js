@@ -19,3 +19,5 @@ export const GET_PROJECTS = 'GET_PROJECTS';
 export const GET_PROJECT = 'GET_PROJECT';
 export const PROJECT_ERROR = 'PROJECT_ERROR';
 export const UPDATE_LIKES = 'UPDATE_LIKES';
+export const DELETE_PROJECT = 'DELETE_PROJECT';
+export const ADD_PROJECT = 'ADD_PROJECT';

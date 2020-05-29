@@ -5,7 +5,9 @@ import {
   GET_PROJECTS,
   GET_PROJECT,
   PROJECT_ERROR,
-  UPDATE_LIKES
+  UPDATE_LIKES,
+  DELETE_PROJECT,
+  ADD_PROJECT
 } from './types';
 
 // Get projects
@@ -68,6 +70,50 @@ export const removeLike = projId => async dispatch => {
       type: UPDATE_LIKES,
       payload: { projId, likes: res.data }
     });
+  } catch (err) {
+    dispatch({
+      type: PROJECT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Delete Project
+export const deletePost = projId => async dispatch => {
+  try {
+    await axios.delete(`/api/projects/${projId}`);
+
+    dispatch({
+      type: DELETE_PROJECT,
+      payload: projId
+    });
+
+    dispatch(setAlert('Project has been removed'));
+  } catch (err) {
+    dispatch({
+      type: PROJECT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Add Project
+export const addPost = formData => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application-json'
+    }
+  }
+
+  try {
+    const res = await axios.delete('/api/projects', formData, config);
+
+    dispatch({
+      type: ADD_PROJECT,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Project has been added'));
   } catch (err) {
     dispatch({
       type: PROJECT_ERROR,

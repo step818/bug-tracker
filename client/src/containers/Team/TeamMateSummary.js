@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const TeamMateSummary = ({ auth, mate: { _id, firstName, lastName, role, user } }) => {
+// * pass teammate .user .id. User is from project's user
+
+const TeamMateSummary = ({ auth, mate: { _id, firstName, lastName, role, user, avatar } }) => {
   return (
     <div>
       <p>--------------------</p>
+      <p>{avatar}</p>
       <p>{firstName} {lastName}</p>
       <p>{role}</p>
       <Link to={`/profile/${user}`}>
-        View profile
+        View Profile
       </Link>
       <p>--------------------</p>
     </div>
@@ -26,4 +29,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {})(TeamMateSummary);
+export default connect(mapStateToProps, { })(TeamMateSummary);

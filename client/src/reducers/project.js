@@ -2,7 +2,9 @@ import {
   GET_PROJECTS,
   GET_PROJECT,
   PROJECT_ERROR,
-  UPDATE_LIKES
+  UPDATE_LIKES,
+  DELETE_PROJECT,
+  ADD_PROJECT
 } from '../actions/types';
 
 const initialState = {
@@ -44,6 +46,18 @@ export default function(state = initialState, action) {
         error: payload,
         loading: false,
         project: null
+      };
+    case ADD_PROJECT:
+      return {
+        ...state,
+        projects: [...state.projects, payload],
+        loading: false
+      }
+    case DELETE_PROJECT:
+      return {
+        ...state,
+        projects: state.projects.filter(proj => proj._id !== payload),
+        loading: false
       };
     default:
       return state;

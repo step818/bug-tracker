@@ -25,7 +25,7 @@ const Team = ({
           {project.team.length > 0 ? (
             project.team.map(mate => {
               return(
-              <TeamMateSummary mate={mate} />
+              <TeamMateSummary key={mate._id} mate={mate} />
             )})
           ):(
             <div>No team mates added yet.</div>
