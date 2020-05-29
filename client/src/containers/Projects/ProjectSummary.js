@@ -32,11 +32,11 @@ const ProjectSummary = ({
           Remove like
         </button>
           <Link to={`/project/${_id}`}>
-            Discussion {comments.length > 0 && (
+            Comments {comments.length > 0 && (
               <span>{comments.length}</span>
             )}
           </Link>
-          <Link to={`/goal/${_id}`}>
+          <Link to={`/project/goal/${_id}`}>
             Goals <span>{goals.length}</span>
           </Link>
           <Link to={'/team'}>
