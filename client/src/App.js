@@ -20,6 +20,7 @@ import EditProfile from './components/ProfileForms/EditProfile';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import Goals from './containers/Projects/Goals/Goals';
+import Comments from './containers/Projects/Comments/Comments';
 // Redux
 import { Provider} from 'react-redux';
 import store from './store';
@@ -45,6 +46,7 @@ const App = () => {
             <Route path='/login' component={Login} />
             <Route path='/profiles' component={Profiles} />
             <Route path='/profile/:id' component={Profile} />
+            <PrivateRoute path='/project/comments/:id' component={Comments} />
             <PrivateRoute path='/project/goal/:id' component={Goals} />
             <PrivateRoute path="/project/:id" component={ProjectDetails} />
             <PrivateRoute path="/addMember" component={AddMember} />

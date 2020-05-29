@@ -19,17 +19,19 @@ const Projects = ({ project: { projects, loading }, getProjects, auth }) => {
         <p>Welcome to the community</p>
         <div>
           {projects.map(proj => {
-            if(proj.user === auth.user._id) {
+            // Only display projects from that user
+            // if(proj.user === auth.user._id) {
             return(
               <ProjectSummary project={proj}></ProjectSummary>
               // <div key={proj._id}>
               //   <p>Text: {proj.lastName}</p>
               //  <p> Likes: {proj.likes}</p>
               // </div>)
-            );} else {
-              return(<div></div>);
-            }
-        })}
+            // );} else {
+            //   return(<div></div>);
+            // }
+            )}
+        )}
         </div>
         {/* Add Project */}
       </Fragment>)

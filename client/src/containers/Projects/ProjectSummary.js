@@ -31,7 +31,7 @@ const ProjectSummary = ({
         <button type='button' onClick={e => removeLike(_id)}>
           Remove like
         </button>
-          <Link to={`/project/${_id}`}>
+          <Link to={`/project/comments/${_id}`}>
             Comments {comments.length > 0 && (
               <span>{comments.length}</span>
             )}
@@ -44,7 +44,7 @@ const ProjectSummary = ({
           </Link>
         {!auth.loading && user === auth.user._id && (
           <button type='button'>
-            Delete comment
+            Delete Project
           </button>
         )}
       </div>

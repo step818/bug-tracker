@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const GoalSummary = ({ auth, goal: { date, _id, title, priority, description, status, user } }) => {
+const GoalSummary = ({ userId, auth, goal: { date, _id, title, priority, description, status, user } }) => {
   return (
     <div>
       <h2>{title}</h2>
       <p>{description}</p>
       <b>Priority: {priority} / 10</b>
-      {!auth.loading && user === auth.user._id && (
-          <button type='button'>
+      <p>Status: {status}</p>
+
+      {!auth.loading && userId === auth.user._id && (
+          <button>
             Delete goal
           </button>
         )}
@@ -20,7 +22,8 @@ const GoalSummary = ({ auth, goal: { date, _id, title, priority, description, st
 
 GoalSummary.propTypes = {
   auth: PropTypes.object.isRequired,
-  goal: PropTypes.object
+  goal: PropTypes.object,
+  userId: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

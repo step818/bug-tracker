@@ -20,7 +20,7 @@ const Goals = ({ project: { project, loading }, auth, getProjectById, match }) =
           {project.goals.map(goal => {
             if (auth.user._id===project.user) {
               return (
-                <GoalSummary goal={goal} />
+                <GoalSummary goal={goal} userId={project.user} />
               );
             } else {
               return (

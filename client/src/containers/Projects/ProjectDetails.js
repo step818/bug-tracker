@@ -23,6 +23,9 @@ const ProjectDetails = ({
         <p>{project.text}</p>
         <p>Description: {project.description}</p>
         <p>{project.date}</p>
+
+        
+
         <h3>Comments</h3>
         <p>{project.comments.length}</p>
         {project.comments.length > 0 && project.comments.map(comment => (
@@ -30,6 +33,10 @@ const ProjectDetails = ({
             <p>{comment.text}</p>
             <p>by: {comment.firstName} {comment.lastName}</p>
             <p>on: {comment.date}</p>
+
+            <button type='button'>
+              Delete comment
+            </button>
           </Fragment>
         ))}
       </Fragment>
