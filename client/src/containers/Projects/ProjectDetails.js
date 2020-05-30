@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { getProjectById } from '../../actions/project';
 import Spinner from '../../hoc/Layout/Spinner';
 import CommentSummary from '../Projects/Comments/CommentSummary';
+import TeamMateSummary from '../Team/TeamMateSummary';
+import GoalSummary from './Goals/GoalSummary';
+import { Link } from 'react-router-dom';
 
 const ProjectDetails = ({ 
   project: { project, loading },
@@ -16,7 +19,7 @@ const ProjectDetails = ({
   }, [getProjectById, match.params.id]);
 
   return (
-    (project === null || loading ? ( 
+    ( project === null || loading ? ( 
       <Spinner /> 
       ) : ( 
       <Fragment>
@@ -25,16 +28,50 @@ const ProjectDetails = ({
         <p>Description: {project.description}</p>
         <p>{project.date}</p>
 
+        <Link to={'/projects'}>
+          <div>Back to projects</div>
+        </Link>
+
+        <h3>Goals</h3>
+        <div>
+          {project.goals.length > 0 ? ( 
+            project.goals.map(goal => {
+            
+              return (
+                <GoalSummary goal={goal} userId={project.user} />
+              );
+          })) : (
+            <div>No goals added yet.</div>
+          )}
+        </div>
+
+
+        <h3>Team</h3>
+        <div>
+          {project.team.length > 0 ? (
+            project.team.map(mate => {
+              return(
+              <TeamMateSummary key={mate._id} mate={mate} />
+            )})
+          ):(
+            <div>No team mates added yet.</div>
+          )}
+        </div>
         
         
         <h3>Comments</h3>
         <p>{project.comments.length}</p>
-        {project.comments.length > 0 && project.comments.map(comment => {
-          return (
-            <CommentSummary comment={comment} userId={project.user} />
-          );
-        })}
-        {/* <Comments projectId={project._id}/> */}
+        {project.comments.length > 0 ? (
+          project.comments.map(comment => {
+            for(let i = 0; i < 5; i++){
+              return (
+                <CommentSummary comment={comment} userId={project.user} />
+              );
+            }
+          })
+        ) : (
+          <div>No comments added yet.</div>
+        ) }
       </Fragment>
       )
     )

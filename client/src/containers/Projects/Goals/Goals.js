@@ -17,17 +17,14 @@ const Goals = ({ project: { project, loading }, auth, getProjectById, match }) =
       <Fragment>
         <h1>Goals</h1>
         <div>
-          {project.goals.map(goal => {
-            if (auth.user._id===project.user) {
+          {project.goals.length > 0 ? ( 
+            project.goals.map(goal => {
               return (
                 <GoalSummary goal={goal} userId={project.user} />
               );
-            } else {
-              return (
-                <div></div>
-              );
-            }
-          })}
+          })) : (
+            <div>No goals added yet.</div>
+          )}
         </div>
       </Fragment>
     ))
