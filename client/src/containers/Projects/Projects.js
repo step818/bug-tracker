@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Spinner from '../../hoc/Layout/Spinner';
 import { getProjects } from '../../actions/project';
 import ProjectSummary from './ProjectSummary';
+import AddProject from './AddProject';
 
 const Projects = ({ project: { projects, loading }, getProjects, auth }) => {
   useEffect(()=> {
@@ -17,6 +18,7 @@ const Projects = ({ project: { projects, loading }, getProjects, auth }) => {
       <Fragment>
         <h1>Projects</h1>
         <p>Welcome to the community</p>
+        <AddProject />
         <div>
           {projects.map(proj => {
             // Only display projects from that user

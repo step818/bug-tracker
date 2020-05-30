@@ -3,28 +3,36 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 // import Moment from 'react-moment';
 import { connect } from 'react-redux';
-import { addLike, removeLike, deletePost } from '../../actions/project';
+import { addLike, removeLike, deleteProject } from '../../actions/project';
 
 const ProjectSummary = ({
   addLike, removeLike,
-  deletePost,
+  deleteProject,
   auth, project: { 
-    _id, text, firstName, lastName, avatar, user, date, 
+    _id, text, description, firstName, lastName, avatar, user, date, 
     likes, goals, team, comments 
   }
 }) => {
 
   return(
     <Fragment key={_id}>
+      <Link to={`/profile/${user}`}>
+        <div>
+          <a>
+            <img src={avatar} alt='' />
+          </a>
+          <h4>{firstName} {lastName}</h4>
+        </div>
+      </Link>
+      <p>---------------</p>
+      <Link to={`/project/${_id}`}>
       <div>
-        <a>
-          <img src={avatar} alt='' />
-        </a>
-        <h4>{firstName} {lastName}</h4>
-      </div>
-      <div>
-        <p>{text}</p>
+        <p>Title: {text}</p>
+        <p>Description: {description}</p>
         <p>Posted on {date}</p>
+      </div>
+      </Link>
+      <div>
         <button type='button' onClick={e => addLike(_id)}>
           Like {likes.length > 0 && (
           <span>{likes.length}</span>)}
@@ -44,7 +52,7 @@ const ProjectSummary = ({
             Team <span>{team.length}</span>
           </Link>
         {!auth.loading && user === auth.user._id && (
-          <button type='button' onClick={e => deletePost(_id)}>
+          <button type='button' onClick={e => deleteProject(_id)}>
             Delete Project
           </button>
         )}
@@ -59,7 +67,7 @@ ProjectSummary.propTypes = {
   auth: PropTypes.object.isRequired,
   addLike: PropTypes.func.isRequired,
   removeLike: PropTypes.func.isRequired,
-  deletePost: PropTypes.func.isRequired
+  deleteProject: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -67,4 +75,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, { addLike, removeLike, deletePost })(ProjectSummary);
+export default connect(mapStateToProps, { addLike, removeLike, deleteProject })(ProjectSummary);

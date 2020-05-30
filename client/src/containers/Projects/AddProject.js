@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { addPost } from '../../actions/project';
+import { addProject } from '../../actions/project';
 import { connect } from 'react-redux';
 
-const AddProject = ({ addPost }) => {
-  const [text, description, setText] = useState('');
+const AddProject = ({ addProject }) => {
+  const [text, setText] = useState('');
+  const [description, setDesc] = useState('');
 
   return (
     <div>
@@ -13,8 +14,9 @@ const AddProject = ({ addPost }) => {
         </div>
         <form onSubmit={e => {
           e.preventDefault();
-          addPost({ text });
+          addProject({ text, description });
           setText('');
+          setDesc('');
         }}>
           <input 
             name="text" 
@@ -26,17 +28,17 @@ const AddProject = ({ addPost }) => {
           <input
             name="description"
             value={description}
-            onChange={e => setText(e.target.value)}
-            placeholder="Short description">
-            </input>
-          <input type="submit" class="btn btn-dark my-1" value="Submit" />
+            onChange={e => setDesc(e.target.value)}
+            placeholder="Write a short description">
+          </input>
+          <input type="submit" value="Submit" />
         </form>
       </div>
   )
 }
 
 AddProject.propTypes = {
-  addPost: PropTypes.func.isRequired
+  addProject: PropTypes.func.isRequired
 };
 
-export default connect(null, { addPost })(AddProject);
+export default connect(null, { addProject })(AddProject);

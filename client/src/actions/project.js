@@ -79,7 +79,7 @@ export const removeLike = projId => async dispatch => {
 };
 
 // Delete Project
-export const deletePost = projId => async dispatch => {
+export const deleteProject = projId => async dispatch => {
   try {
     await axios.delete(`/api/projects/${projId}`);
 
@@ -98,15 +98,15 @@ export const deletePost = projId => async dispatch => {
 };
 
 // Add Project
-export const addPost = formData => async dispatch => {
+export const addProject = formData => async dispatch => {
   const config = {
     headers: {
-      'Content-Type': 'application-json'
+      'Content-Type': 'application/json'
     }
   }
 
   try {
-    const res = await axios.delete('/api/projects', formData, config);
+    const res = await axios.post('/api/projects', formData, config);
 
     dispatch({
       type: ADD_PROJECT,

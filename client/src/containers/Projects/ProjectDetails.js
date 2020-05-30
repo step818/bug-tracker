@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProjectById } from '../../actions/project';
 import Spinner from '../../hoc/Layout/Spinner';
+import CommentSummary from '../Projects/Comments/CommentSummary';
 
 const ProjectDetails = ({ 
   project: { project, loading },
@@ -25,20 +26,15 @@ const ProjectDetails = ({
         <p>{project.date}</p>
 
         
-
+        
         <h3>Comments</h3>
         <p>{project.comments.length}</p>
-        {project.comments.length > 0 && project.comments.map(comment => (
-          <Fragment key={comment._id}>
-            <p>{comment.text}</p>
-            <p>by: {comment.firstName} {comment.lastName}</p>
-            <p>on: {comment.date}</p>
-
-            <button type='button'>
-              Delete comment
-            </button>
-          </Fragment>
-        ))}
+        {project.comments.length > 0 && project.comments.map(comment => {
+          return (
+            <CommentSummary comment={comment} userId={project.user} />
+          );
+        })}
+        {/* <Comments projectId={project._id}/> */}
       </Fragment>
       )
     )

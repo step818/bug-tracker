@@ -50,9 +50,9 @@ export default function(state = initialState, action) {
     case ADD_PROJECT:
       return {
         ...state,
-        projects: [...state.projects, payload],
+        projects: [payload, ...state.projects],
         loading: false
-      }
+      };
     case DELETE_PROJECT:
       return {
         ...state,
