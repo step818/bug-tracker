@@ -26,7 +26,7 @@ const ProjectDetails = ({
       <Fragment>
         <h2>Project Details</h2>
         <p>{project.text}</p>
-        <p>Description: {project.description}</p>
+        {project.description && <p>Description: {project.description}</p>}
         <p>{project.date}</p>
 
         <Link to={'/projects'}>
@@ -62,12 +62,12 @@ const ProjectDetails = ({
         
         <h3>Comments</h3>
         <CommentForm projId={project._id} />
-        <p>{project.comments.length}</p>
+        <p>{project.comments.length} comments</p>
         {project.comments.length > 0 ? (
           project.comments.map(comment => {
             for(let i = 0; i < 5; i++){
               return (
-                <CommentSummary comment={comment} userId={project.user} />
+                <CommentSummary key={comment._id} comment={comment} projId={project._id} userId={project.user} />
               );
             }
           })

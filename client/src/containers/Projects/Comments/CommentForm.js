@@ -6,7 +6,7 @@ import { addComment } from '../../../actions/project';
 const CommentForm = ({ projId, addComment }) => {
   const [text, setText] = useState('');
 
-  
+  // setText is prebuilt, no need to build it here.
 
   return (
     <div>
@@ -26,7 +26,7 @@ const CommentForm = ({ projId, addComment }) => {
           value={text}
           onChange={e => setText(e.target.value)}
         />
-        
+
         <input type='submit' value='Submit' />
       </form>
       

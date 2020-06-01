@@ -17,25 +17,22 @@ const Projects = ({ project: { projects, loading }, getProjects, auth }) => {
       ) : (
       <Fragment>
         <h1>Projects</h1>
-        <p>Welcome to the community</p>
-        <AddProject />
+        <div>
+          <p>Welcome to the community</p>
+        </div>
+        <div>
+          <AddProject />
+        </div>
         <div>
           {projects.map(proj => {
+            // @TODO Optional after testing.
             // Only display projects from that user
             // if(proj.user === auth.user._id) {
             return(
               <ProjectSummary project={proj}></ProjectSummary>
-              // <div key={proj._id}>
-              //   <p>Text: {proj.lastName}</p>
-              //  <p> Likes: {proj.likes}</p>
-              // </div>)
-            // );} else {
-            //   return(<div></div>);
-            // }
             )}
         )}
         </div>
-        {/* Add Project */}
       </Fragment>)
     )
   )
