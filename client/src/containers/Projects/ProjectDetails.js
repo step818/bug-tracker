@@ -7,6 +7,7 @@ import CommentSummary from '../Projects/Comments/CommentSummary';
 import TeamMateSummary from '../Team/TeamMateSummary';
 import GoalSummary from './Goals/GoalSummary';
 import { Link } from 'react-router-dom';
+import CommentForm from './Comments/CommentForm';
 
 const ProjectDetails = ({ 
   project: { project, loading },
@@ -60,6 +61,7 @@ const ProjectDetails = ({
         
         
         <h3>Comments</h3>
+        <CommentForm projId={project._id} />
         <p>{project.comments.length}</p>
         {project.comments.length > 0 ? (
           project.comments.map(comment => {

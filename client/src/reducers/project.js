@@ -4,7 +4,9 @@ import {
   PROJECT_ERROR,
   UPDATE_LIKES,
   DELETE_PROJECT,
-  ADD_PROJECT
+  ADD_PROJECT,
+  DELETE_COMMENT,
+  ADD_COMMENT
 } from '../actions/types';
 
 const initialState = {
@@ -59,6 +61,25 @@ export default function(state = initialState, action) {
         projects: state.projects.filter(proj => proj._id !== payload),
         loading: false
       };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        project : { 
+          ...state.project, 
+          comments: [payload, ...state.project.comments]},
+        loading: false
+      };
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        project: {
+          ...state.project,
+          comments: state.project.comments.filter(
+            comment => comment._id !== payload
+          ),
+          loading:false
+        }
+      }
     default:
       return state;
   }

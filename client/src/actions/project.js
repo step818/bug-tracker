@@ -7,7 +7,9 @@ import {
   PROJECT_ERROR,
   UPDATE_LIKES,
   DELETE_PROJECT,
-  ADD_PROJECT
+  ADD_PROJECT,
+  ADD_COMMENT,
+  DELETE_COMMENT
 } from './types';
 
 // Get projects
@@ -114,6 +116,51 @@ export const addProject = formData => async dispatch => {
     });
 
     dispatch(setAlert('Project has been added'));
+  } catch (err) {
+    dispatch({
+      type: PROJECT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Add Comment
+export const addComment = (projId, formData) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  try {
+    const res = await axios.post(`/api/projects/comment/${projId}`, formData, config);
+
+    dispatch({
+      type: ADD_COMMENT,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Comment added'));
+  } catch (err) {
+    dispatch({
+      type: PROJECT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Delete Comment
+export const deleteComment = (projId, commentId) => async dispatch => {
+
+  try {
+    await axios.delete(`/api/projects/comment/${projId}/${commentId}`);
+
+    dispatch({
+      type: DELETE_COMMENT,
+      payload: commentId
+    });
+
+    dispatch(setAlert('Comment deleted'));
   } catch (err) {
     dispatch({
       type: PROJECT_ERROR,

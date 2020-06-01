@@ -205,7 +205,7 @@ router.post(
 });
 
 //@route  Delete api/projects/comment/:id/:comment_id
-//@desc   Delete comment to a project
+//@desc   Delete comment from a project
 //@access Private
 router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
   try {
@@ -241,6 +241,51 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+//@TODO: Finish Backend for user joining a team project
+//@route  Post api/projects/team
+//@desc   Join a team project
+//@access Private
+router.post(
+  '/team/:id',
+  [
+    auth, 
+    [
+      check('text', 'Text is required')
+      .not()
+      .isEmpty()
+    ]
+  ], 
+  async (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+      const project = await Project.findById(req.params.id);
+
+      const newComment = {
+        text: req.body.text,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        avatar: user.avatar,
+        user: req.user.id
+      };
+
+      project.comments.unshift(newComment);
+
+      await project.save();
+
+      res.json(project.comments);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+});
+
 
 //@route  Post api/projects/goal
 //@desc   Post a goal to a project

@@ -28,7 +28,9 @@ const ProjectSummary = ({
       <Link to={`/project/${_id}`}>
       <div>
         <p>Title: {text}</p>
-        <p>Description: {description}</p>
+        {description && 
+          <p>Description: {description}</p>
+        }
         <p>Posted on {date}</p>
       </div>
       </Link>
@@ -48,7 +50,7 @@ const ProjectSummary = ({
           <Link to={`/project/goal/${_id}`}>
             Goals <span>{goals.length}</span>
           </Link>
-          <Link to={`/team/${_id}`}>
+          <Link to={`/project/team/${_id}`}>
             Team <span>{team.length}</span>
           </Link>
         {!auth.loading && user === auth.user._id && (

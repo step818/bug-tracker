@@ -7,6 +7,9 @@ const CommentSummary = ({
   userId, auth }) => {
   return (
     <div>
+      <div>
+        <h4>Comment Summary</h4>
+      </div>
       <p>{firstName} {lastName}</p>
       <p>Comment: {text}</p>
       <p>commented on: {date}</p>

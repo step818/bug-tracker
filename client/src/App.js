@@ -51,7 +51,7 @@ const App = () => {
             <PrivateRoute path="/project/:id" component={ProjectDetails} />
             <PrivateRoute path="/addMember" component={AddMember} />
             <PrivateRoute path="/account/:id" component={Account} />
-            <PrivateRoute path='/team/:id' component={Team} />
+            <PrivateRoute path='/project/team/:id' component={Team} />
             <PrivateRoute path="/notifications" component={Notifications} />
             <PrivateRoute path="/addProject" component={AddProject} />
             <PrivateRoute path="/projects" component={Projects} />
