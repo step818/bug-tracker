@@ -23,7 +23,7 @@ const CommentSummary = ({
         View Profile
       </Link>
       {!auth.loading && user === auth.user._id && (
-          <button onClick={e => deleteComment(projId, _id)} type='button'>
+          <button type='button' onClick={e => deleteComment(projId, _id)}>
             Delete Comment
           </button>
         )}

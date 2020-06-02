@@ -195,3 +195,23 @@ export const addGoal = (projId, formData) => async dispatch => {
     });
   }
 };
+
+// Delete Goal
+export const deleteGoal = (projId, goalId) => async dispatch => {
+
+  try {
+    await axios.delete(`/api/projects/goal/${projId}/${goalId}`);
+
+    dispatch({
+      type: DELETE_GOAL,
+      payload: goalId
+    });
+
+    dispatch(setAlert('Goal deleted'));
+  } catch (err) {
+    dispatch({
+      type: PROJECT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};

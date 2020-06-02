@@ -22,7 +22,7 @@ const Goals = ({ project: { project, loading }, auth, getProjectById, match }) =
           {project.goals.length > 0 ? ( 
             project.goals.map(goal => {
               return (
-                <GoalSummary goal={goal} userId={project.user} />
+                <GoalSummary goal={goal} projId={project._id} />
               );
           })) : (
             <div>No goals added yet.</div>

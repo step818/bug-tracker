@@ -37,7 +37,7 @@ const ProjectDetails = ({
         <h3>Goals</h3>
         <AddGoal projId={project._id} />
         <div>
-          {project.goals.length > 0 ? ( 
+          {project.goals && project.goals.length > 0 ? ( 
             project.goals.map(goal => {
               return (
                 <GoalSummary key={goal._id} goal={goal} userId={project.user} />

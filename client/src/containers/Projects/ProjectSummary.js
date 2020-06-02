@@ -18,9 +18,7 @@ const ProjectSummary = ({
     <Fragment key={_id}>
       <Link to={`/profile/${user}`}>
         <div>
-          <a>
             <img src={avatar} alt='' />
-          </a>
           <h4>{firstName} {lastName}</h4>
         </div>
       </Link>

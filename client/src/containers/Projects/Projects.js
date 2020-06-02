@@ -30,7 +30,7 @@ const Projects = ({ project: { projects, loading }, getProjects, auth }) => {
             // Only display projects from that user
             // if(proj.user === auth.user._id) {
             return(
-              <ProjectSummary project={proj}></ProjectSummary>
+              <ProjectSummary key={proj._id} project={proj} />
             )}
         )}
         </div>

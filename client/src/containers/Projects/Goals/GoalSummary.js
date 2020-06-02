@@ -1,8 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { deleteGoal } from '../../../actions/project';
 
-const GoalSummary = ({ userId, auth, goal: { date, _id, title, priority, description, status, user } }) => {
+const GoalSummary = ({ 
+  projId, deleteGoal, userId, auth, 
+  goal: { date, _id, title, priority, description, status, user } }) => {
   return (
     <div>
       <h2>{title}</h2>
@@ -10,8 +13,8 @@ const GoalSummary = ({ userId, auth, goal: { date, _id, title, priority, descrip
       <b>Priority: {priority} / 10</b>
       <p>Status: {status}</p>
 
-      {!auth.loading && userId === auth.user._id && (
-          <button>
+      {!auth.loading && user === auth.user._id && (
+          <button type='button' onClick={e => deleteGoal(projId, _id)}>
             Delete goal
           </button>
         )}
@@ -21,12 +24,14 @@ const GoalSummary = ({ userId, auth, goal: { date, _id, title, priority, descrip
 
 GoalSummary.propTypes = {
   auth: PropTypes.object.isRequired,
-  goal: PropTypes.object,
-  userId: PropTypes.string.isRequired
+  goal: PropTypes.object.isRequired,
+  userId: PropTypes.string,
+  deleteGoal: PropTypes.func.isRequired,
+  projId: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {})(GoalSummary);
+export default connect(mapStateToProps, { deleteGoal })(GoalSummary);

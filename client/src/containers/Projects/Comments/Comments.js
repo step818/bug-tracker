@@ -20,7 +20,7 @@ const Comments = ({ project: {project, loading}, getProjectById, match }) => {
           {project.comments.length > 0 ? (
             project.comments.map(comment => {
               return (
-                <CommentSummary comment={comment} projId={project._id} userId={project.user} />
+                <CommentSummary comment={comment} projId={project._id} />
               );
             })
           ) : (

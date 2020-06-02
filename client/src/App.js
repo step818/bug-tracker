@@ -48,10 +48,10 @@ const App = () => {
             <Route path='/profile/:id' component={Profile} />
             <PrivateRoute path='/project/comments/:id' component={Comments} />
             <PrivateRoute path='/project/goal/:id' component={Goals} />
+            <PrivateRoute path='/project/team/:id' component={Team} />
             <PrivateRoute path="/project/:id" component={ProjectDetails} />
             <PrivateRoute path="/addMember" component={AddMember} />
             <PrivateRoute path="/account/:id" component={Account} />
-            <PrivateRoute path='/project/team/:id' component={Team} />
             <PrivateRoute path="/notifications" component={Notifications} />
             <PrivateRoute path="/addProject" component={AddProject} />
             <PrivateRoute path="/projects" component={Projects} />
