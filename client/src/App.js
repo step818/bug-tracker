@@ -45,7 +45,7 @@ const App = () => {
             <Route path='/register' component={Register} />
             <Route path='/login' component={Login} />
             <Route path='/profiles' component={Profiles} />
-            <Route path='/profile/:id' component={Profile} />
+            <Route path='/profile/user/:id' component={Profile} />
             <PrivateRoute path='/project/comments/:id' component={Comments} />
             <PrivateRoute path='/project/goal/:id' component={Goals} />
             <PrivateRoute path='/project/team/:id' component={Team} />

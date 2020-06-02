@@ -28,10 +28,13 @@ const Projects = ({ project: { projects, loading }, getProjects, auth }) => {
           {projects.map(proj => {
             // @TODO Optional after testing.
             // Only display projects from that user
-            // if(proj.user === auth.user._id) {
-            return(
-              <ProjectSummary key={proj._id} project={proj} />
-            )}
+            // and from friends
+            if(proj.user === auth.user._id) {
+              return(
+                <ProjectSummary key={proj._id} project={proj} />
+              );
+            }
+          }
         )}
         </div>
       </Fragment>)

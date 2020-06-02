@@ -40,7 +40,7 @@ const ProjectDetails = ({
           {project.goals && project.goals.length > 0 ? ( 
             project.goals.map(goal => {
               return (
-                <GoalSummary key={goal._id} goal={goal} userId={project.user} />
+                <GoalSummary key={goal._id} goal={goal} projId={project._id} />
               );
           })) : (
             <div>No goals added yet.</div>
@@ -68,7 +68,7 @@ const ProjectDetails = ({
           project.comments.map(comment => {
             for(let i = 0; i < 5; i++){
               return (
-                <CommentSummary key={comment._id} comment={comment} projId={project._id} userId={project.user} />
+                <CommentSummary key={comment._id} comment={comment} projId={project._id} />
               );
             }
           })

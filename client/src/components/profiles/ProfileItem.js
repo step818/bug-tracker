@@ -18,7 +18,7 @@ const ProfileItem = ({
       <h2>{firstName + " " + lastName}</h2>
       <p>{status} {company && <span> at {company}</span>}</p>
       <p>{location && <span>{location}</span>}</p>
-      <Link to={`profile/${_id}`}>
+      <Link to={`profile/user/${_id}`}>
         View Profile
       </Link>
     </div>

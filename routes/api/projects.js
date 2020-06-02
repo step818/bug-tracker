@@ -83,7 +83,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 //@route  Delete api/projects/:id
-//@desc   Delete a post
+//@desc   Delete a project
 //@access Private
 router.delete('/:id', auth, async (req, res) => {
   try {
@@ -339,6 +339,44 @@ router.post(
       console.error(err.message);
       res.status(500).send('Server Error');
     }
+});
+
+//@route  Delete api/projects/goal/:id/:comment_id
+//@desc   Delete goal from a project
+//@access Private
+router.delete('/goal/:id/:goal_id', auth, async (req, res) => {
+  try {
+    const project = await Project.findById(req.params.id);
+
+    // Pull out goal
+    const goal = project.goals.find(
+      goal => goal.id === req.params.goal_id
+    );
+
+    // Make sure goal exists
+    if (!goal) {
+      return res.status(404).json({ msg: 'Goal does not exist' });
+    }
+
+    // Check user
+    if (goal.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User not authorized' });
+    }
+
+    // Get remove index
+    const removeIndex = project.goals
+      .map(goal => goal.user.toString())
+      .indexOf(req.user.id);
+
+    project.goals.splice(removeIndex, 1);
+
+    await project.save();
+
+    res.json(project.goals);
+  } catch (err) {
+    console.error(err.message + "allo");
+    res.status(500).send('Server Error');
+  }
 });
 
 //@route  Post api/projects/team
