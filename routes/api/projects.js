@@ -286,7 +286,6 @@ router.post(
     }
 });
 
-
 //@route  Post api/projects/goal
 //@desc   Post a goal to a project
 //@access Private

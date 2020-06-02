@@ -6,7 +6,9 @@ import {
   DELETE_PROJECT,
   ADD_PROJECT,
   DELETE_COMMENT,
-  ADD_COMMENT
+  ADD_COMMENT,
+  DELETE_GOAL,
+  ADD_GOAL
 } from '../actions/types';
 
 const initialState = {
@@ -61,6 +63,24 @@ export default function(state = initialState, action) {
         projects: state.projects.filter(proj => proj._id !== payload),
         loading: false
       };
+    case ADD_GOAL:
+      return{
+        ...state,
+        project: {
+          goals: [payload, ...state.project.comments]},
+        loading: false
+      };
+    case DELETE_GOAL:
+      return {
+        ...state,
+        project: {
+          ...state.project,
+          goals: state.project.goals.filter(
+            goal => goal._id !== payload
+          )
+        },
+        loading: false
+      }
     case ADD_COMMENT:
       return {
         ...state,
@@ -76,9 +96,9 @@ export default function(state = initialState, action) {
           ...state.project,
           comments: state.project.comments.filter(
             comment => comment._id !== payload
-          ),
-          loading:false
-        }
+          )
+        },
+        loading:false
       }
     default:
       return state;

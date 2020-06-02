@@ -18,6 +18,7 @@ const Projects = ({ project: { projects, loading }, getProjects, auth }) => {
       <Fragment>
         <h1>Projects</h1>
         <div>
+        
           <p>Welcome to the community</p>
         </div>
         <div>

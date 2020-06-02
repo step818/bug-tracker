@@ -23,3 +23,5 @@ export const DELETE_PROJECT = 'DELETE_PROJECT';
 export const ADD_PROJECT = 'ADD_PROJECT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const ADD_GOAL = 'ADD_GOAL';
+export const DELETE_GOAL = 'DELETE_GOAL';

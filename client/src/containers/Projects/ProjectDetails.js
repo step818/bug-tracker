@@ -8,6 +8,7 @@ import TeamMateSummary from '../Team/TeamMateSummary';
 import GoalSummary from './Goals/GoalSummary';
 import { Link } from 'react-router-dom';
 import CommentForm from './Comments/CommentForm';
+import AddGoal from '../Projects/Goals/AddGoal';
 
 const ProjectDetails = ({ 
   project: { project, loading },
@@ -34,12 +35,12 @@ const ProjectDetails = ({
         </Link>
 
         <h3>Goals</h3>
+        <AddGoal projId={project._id} />
         <div>
           {project.goals.length > 0 ? ( 
             project.goals.map(goal => {
-            
               return (
-                <GoalSummary goal={goal} userId={project.user} />
+                <GoalSummary key={goal._id} goal={goal} userId={project.user} />
               );
           })) : (
             <div>No goals added yet.</div>
@@ -49,7 +50,7 @@ const ProjectDetails = ({
 
         <h3>Team</h3>
         <div>
-          {project.team.length > 0 ? (
+          {project.team && project.team.length > 0 ? (
             project.team.map(mate => {
               return(
               <TeamMateSummary key={mate._id} mate={mate} />
@@ -62,8 +63,8 @@ const ProjectDetails = ({
         
         <h3>Comments</h3>
         <CommentForm projId={project._id} />
-        <p>{project.comments.length} comments</p>
-        {project.comments.length > 0 ? (
+        <p>{project.comments && project.comments.length} comments</p>
+        {project.comments && project.comments.length > 0 ? (
           project.comments.map(comment => {
             for(let i = 0; i < 5; i++){
               return (

@@ -22,7 +22,7 @@ const GoalSummary = ({ userId, auth, goal: { date, _id, title, priority, descrip
 GoalSummary.propTypes = {
   auth: PropTypes.object.isRequired,
   goal: PropTypes.object,
-  userId: PropTypes.object.isRequired
+  userId: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({

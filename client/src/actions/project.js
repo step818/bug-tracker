@@ -9,7 +9,9 @@ import {
   DELETE_PROJECT,
   ADD_PROJECT,
   ADD_COMMENT,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  ADD_GOAL,
+  DELETE_GOAL
 } from './types';
 
 // Get projects
@@ -161,6 +163,31 @@ export const deleteComment = (projId, commentId) => async dispatch => {
     });
 
     dispatch(setAlert('Comment deleted'));
+  } catch (err) {
+    dispatch({
+      type: PROJECT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Add Goal to a Project
+export const addGoal = (projId, formData) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  try {
+    const res = await axios.post(`/api/projects/goal/${projId}`, formData, config);
+
+    dispatch({
+      type: ADD_GOAL,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Goal added'));
   } catch (err) {
     dispatch({
       type: PROJECT_ERROR,

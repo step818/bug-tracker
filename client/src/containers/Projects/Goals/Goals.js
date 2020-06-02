@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import GoalSummary from './GoalSummary';
 import { getProjectById } from '../../../actions/project';
 import Spinner from '../../../hoc/Layout/Spinner';
+import AddGoal from './AddGoal';
 
 const Goals = ({ project: { project, loading }, auth, getProjectById, match }) => {
   useEffect(() => {
@@ -16,6 +17,7 @@ const Goals = ({ project: { project, loading }, auth, getProjectById, match }) =
     ) : (
       <Fragment>
         <h1>Goals</h1>
+        <AddGoal projId={project._id} />
         <div>
           {project.goals.length > 0 ? ( 
             project.goals.map(goal => {
