@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema({
   },
   points: {
     type: Number,
-    default: 1
+    default: 0
   },
   date: {
     type: Date,

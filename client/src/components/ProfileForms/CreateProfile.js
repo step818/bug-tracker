@@ -38,7 +38,7 @@ const CreateProfile = ({ auth: { user }, addPoints, createProfile, history }) =>
   
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value});
-  const reward = 7;
+  const reward = 4;
   const onSubmit = e => {
     e.preventDefault();
     addPoints(user._id, reward);

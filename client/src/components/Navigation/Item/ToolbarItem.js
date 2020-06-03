@@ -4,7 +4,7 @@ import classes from './ToolbarItem.module.css';
 
 const toolbarItem = (props) => (
   <div>
-    <NavLink to={props.link} path={props.exact} activeClassName={classes.active} >
+    <NavLink to={props.link} exact activeClassName={classes.active} >
       {props.children}
     </NavLink>
   </div>
