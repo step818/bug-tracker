@@ -1,8 +1,13 @@
-import { GET_PROFILE, GET_PROFILES, GET_REPOS, PROFILE_ERROR, CLEAR_PROFILE } from "../actions/types";
+import { 
+  GET_PROFILE, 
+  GET_PROFILES, 
+  GET_REPOS, 
+  PROFILE_ERROR, 
+  CLEAR_PROFILE
+} from "../actions/types";
 
 const initialState = {
   profile: null,
-  points: 69,
   profiles: [],
   repos: [],
   loading: true,
@@ -44,7 +49,7 @@ export default function(state = initialState, action) {
         profile: null,
         repos: [],
         loading: false
-      }
+      };
     default:
       return state;
   }

@@ -6,7 +6,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  ACCOUNT_DELETED
+  ACCOUNT_DELETED,
+  ADD_POINTS
 } from '../actions/types';
 
 const initialState = {
@@ -47,6 +48,11 @@ export default function(state = initialState, action) {
         token: null,
         isAuthenticated: false,
         loading: false
+      };
+    case ADD_POINTS:
+      return {
+        ...state,
+        user: state.user.points = state.user.points + payload
       };
     default:
       return state;

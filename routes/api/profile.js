@@ -53,7 +53,6 @@ router.post(
 
     const {
       company,
-      points,
       location,
       bio,
       status,
@@ -70,7 +69,6 @@ router.post(
     const profileFields = {};
     profileFields.user = req.user.id;
     if(company) profileFields.company = company;
-    if(points) profileFields.points = points;
     if(location) profileFields.location = location;
     if(bio) profileFields.bio = bio;
     if(status) profileFields.status = status;

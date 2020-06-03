@@ -78,9 +78,28 @@ router.post(
       console.error(err.message);
       res.status(500).send('Server error');
     }
-
-    
   }
 );
+
+//@route  PUT api/user/points/:id
+//@desc   User gets rewarded or deducted points
+//@access Private
+router.put('/points/:id', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select('-password');
+
+    // Add points
+    const newPoints = req.body.points;
+
+    user.points = user.points + newPoints;
+
+    await user.save();
+
+    res.json(user.points);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;

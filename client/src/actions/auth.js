@@ -8,7 +8,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_PROFILE
+  CLEAR_PROFILE,
+  ADD_POINTS
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
