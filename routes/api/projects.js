@@ -379,6 +379,29 @@ router.delete('/goal/:id/:goal_id', auth, async (req, res) => {
   }
 });
 
+//@route  PUT api/projects/goal/complete/:id
+//@desc   Complete a goal
+//@access Private
+router.put('/like/:id', auth, async (req, res) => {
+  try {
+    const project = await Project.findById(req.params.id);
+
+    // Check if the post has already been liked by a user
+    if(project.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
+      return res.status(400).json({ msg: 'Project already liked '});
+    }
+
+    project.likes.unshift({ user: req.user.id });
+
+    await project.save();
+
+    res.json(project.likes);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 //@route  Post api/projects/team
 //@desc   Post team @todo Later make it so user INVITES team
 //@access Private

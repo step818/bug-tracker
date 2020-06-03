@@ -215,3 +215,20 @@ export const deleteGoal = (projId, goalId) => async dispatch => {
     });
   }
 };
+
+// Complete goal
+export const completeGoal = projId => async dispatch => {
+  try {
+    const res = await axios.put(`/api/projects/like/${projId}`);
+
+    dispatch({
+      type: UPDATE_LIKES,
+      payload: { projId, likes: res.data }
+    });
+  } catch (err) {
+    dispatch({
+      type: PROJECT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};

@@ -60,6 +60,10 @@ const ProjectSchema = new Schema({
       },
       status: {
         type: String
+      },
+      done: {
+        type: Boolean,
+        default: false
       }
     }
   ],

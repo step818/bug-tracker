@@ -19,6 +19,7 @@ const Goals = ({ project: { project, loading }, auth, getProjectById, match }) =
         <h1>Goals</h1>
         <AddGoal projId={project._id} />
         <div>
+        <p>---------------------</p>
           {project.goals.length > 0 ? ( 
             project.goals.map(goal => {
               return (

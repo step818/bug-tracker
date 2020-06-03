@@ -5,13 +5,14 @@ import { deleteGoal } from '../../../actions/project';
 
 const GoalSummary = ({ 
   projId, deleteGoal, userId, auth, 
-  goal: { date, _id, title, priority, description, status, user } }) => {
+  goal: { date, _id, title, done, priority, description, status, user } }) => {
   return (
     <div>
       <h2>{title}</h2>
       <p>{description}</p>
       <b>Priority: {priority} / 10</b>
       <p>Status: {status}</p>
+      <p>Completed: {!done ? (<span>False</span>) : (<span>True</span>)}</p>
 
       {!auth.loading && user === auth.user._id && (
           <button type='button' onClick={e => deleteGoal(projId, _id)}>

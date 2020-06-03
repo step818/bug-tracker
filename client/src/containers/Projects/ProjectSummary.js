@@ -16,12 +16,12 @@ const ProjectSummary = ({
 
   return(
     <Fragment key={_id}>
-      <Link to={`/profile/${user}`}>
+      {/* <Link to={`/profile/${user}`}>
         <div>
             <img src={avatar} alt='' />
           <h4>{firstName} {lastName}</h4>
         </div>
-      </Link>
+      </Link> */}
       <p>---------------</p>
       <Link to={`/project/${_id}`}>
       <div>
@@ -33,13 +33,6 @@ const ProjectSummary = ({
       </div>
       </Link>
       <div>
-        <button type='button' onClick={e => addLike(_id)}>
-          Like {likes.length > 0 && (
-          <span>{likes.length}</span>)}
-        </button>
-        <button type='button' onClick={e => removeLike(_id)}>
-          Remove like
-        </button>
           <Link to={`/project/comments/${_id}`}>
             Comments {comments.length > 0 && (
               <span>{comments.length}</span>
@@ -51,6 +44,13 @@ const ProjectSummary = ({
           <Link to={`/project/team/${_id}`}>
             Team <span>{team.length}</span>
           </Link>
+          <button type='button' onClick={e => addLike(_id)}>
+            Like {likes.length > 0 && (
+            <span>{likes.length}</span>)}
+          </button>
+          <button type='button' onClick={e => removeLike(_id)}>
+            Remove like
+          </button>
         {!auth.loading && user === auth.user._id && (
           <button type='button' onClick={e => deleteProject(_id)}>
             Delete Project

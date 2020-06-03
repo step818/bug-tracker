@@ -118,8 +118,10 @@ export const addPoints = (userId, points) => async dispatch => {
     }
   }
 
+  const body = JSON.stringify({ points });
+
   try {
-    const res = await axios.put(`/api/auth/points/${userId}`, points, config);
+    const res = await axios.put(`/api/auth/points/${userId}`, body, config);
 
     dispatch({
       type: ADD_POINTS,
