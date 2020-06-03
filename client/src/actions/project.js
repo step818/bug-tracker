@@ -11,7 +11,8 @@ import {
   ADD_COMMENT,
   DELETE_COMMENT,
   ADD_GOAL,
-  DELETE_GOAL
+  DELETE_GOAL,
+  GOAL_DONE_UPDATE
 } from './types';
 
 // Get projects
@@ -216,14 +217,14 @@ export const deleteGoal = (projId, goalId) => async dispatch => {
   }
 };
 
-// Complete goal
-export const completeGoal = projId => async dispatch => {
+// Complete goal switch
+export const completeGoal = (projId, goalId) => async dispatch => {
   try {
-    const res = await axios.put(`/api/projects/like/${projId}`);
+    const res = await axios.put(`/api/projects/goal/${projId}/${goalId}`);
 
     dispatch({
-      type: UPDATE_LIKES,
-      payload: { projId, likes: res.data }
+      type: GOAL_DONE_UPDATE,
+      payload: res.data
     });
   } catch (err) {
     dispatch({

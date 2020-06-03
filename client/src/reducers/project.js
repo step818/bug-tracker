@@ -8,7 +8,8 @@ import {
   DELETE_COMMENT,
   ADD_COMMENT,
   DELETE_GOAL,
-  ADD_GOAL
+  ADD_GOAL,
+  GOAL_DONE_UPDATE
 } from '../actions/types';
 
 const initialState = {
@@ -80,7 +81,16 @@ export default function(state = initialState, action) {
           )
         },
         loading: false
-      }
+      };
+    case GOAL_DONE_UPDATE:
+      return {
+        ...state,
+        project: {
+          ...state.project,
+          goals: payload
+        },
+        loading: false
+      };
     case ADD_COMMENT:
       return {
         ...state,

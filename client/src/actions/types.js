@@ -26,4 +26,4 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const ADD_GOAL = 'ADD_GOAL';
 export const DELETE_GOAL = 'DELETE_GOAL';
 export const ADD_POINTS = 'ADD_POINTS';
-export const GOAL_COMPLETE_UPDATE = 'GOAL_COMPLETE_UPDATE';
+export const GOAL_DONE_UPDATE = 'GOAL_DONE_UPDATE';

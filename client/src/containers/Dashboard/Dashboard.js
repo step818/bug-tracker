@@ -17,36 +17,17 @@ const Dashboard = ({ auth, getCurrentProfile, deleteAccount, profile: { profile,
   ) : (
     <Fragment>
       <h1>Dashboard</h1>
-      <p>Welcome {auth.user && auth.user.firstName}</p>
+      <h3>Welcome {auth.user && auth.user.firstName}</h3>
       <p>Pebbles: {auth.user && auth.user.points}</p>
       {profile !== null ? (
         <Fragment>
           <DashboardActions/>
           <ProfileTop profile={profile} />
-          {/* <h3>Bio</h3>
-          <p>{profile.bio}</p>
-          <h3>Company</h3>
-          <p>{profile.company}</p>
-          <h3>Skills</h3>
-          <p>{profile.skills.map(skill => (
-            <p>
-              {skill}</p>
-          ))}</p> */}
-          <div>
-            <button onClick={() => deleteAccount()}>
-              <i>Delete My Account</i>
-            </button>
-          </div>
         </Fragment>
       ) : (
         <Fragment>
             <p>You have not yet set up a profile, please add some info.</p>
             <Link to='/create-profile'>Create Profile</Link>
-            <div>
-              <button onClick={() => deleteAccount()}>
-                <i>Delete My Account</i>
-              </button>
-            </div>
         </Fragment>
       )}
     </Fragment>
