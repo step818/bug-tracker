@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { addGoal } from '../../../actions/project';
+import { addPoints } from '../../../actions/auth';
 import { connect } from 'react-redux';
 
-const AddGoal = ({ projId, addGoal }) => {
+const AddGoal = ({ projId, addGoal, auth:{ user }, addPoints }) => {
   const [title, setTitle] = useState('');
   const [priority, setPrio] = useState('');
   const [description, setDesc] = useState('');
   const [status, setStat] = useState('');
+
+  const newGoalReward = 1;
 
   return (
     <div>
@@ -17,6 +20,7 @@ const AddGoal = ({ projId, addGoal }) => {
             <form
               onSubmit={e => {
                 e.preventDefault();
+                addPoints(user._id, newGoalReward);
                 addGoal( projId, { title, priority, description, status });
                 setTitle(''); setPrio(''); setDesc(''); setStat('');
               }}>
@@ -57,7 +61,13 @@ const AddGoal = ({ projId, addGoal }) => {
 
 AddGoal.propTypes = {
   addGoal: PropTypes.func.isRequired,
-  projId: PropTypes.string.isRequired
+  projId: PropTypes.string.isRequired,
+  addPoints: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
-export default connect( null, { addGoal })(AddGoal);
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect( mapStateToProps, { addGoal, addPoints })(AddGoal);

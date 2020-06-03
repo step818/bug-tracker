@@ -220,7 +220,7 @@ export const deleteGoal = (projId, goalId) => async dispatch => {
 // Complete goal switch
 export const completeGoal = (projId, goalId) => async dispatch => {
   try {
-    const res = await axios.put(`/api/projects/goal/${projId}/${goalId}`);
+    const res = await axios.put(`/api/projects/goal/done/${projId}/${goalId}`);
 
     dispatch({
       type: GOAL_DONE_UPDATE,

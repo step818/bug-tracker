@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteComment } from '../../../actions/project';
 import { Link } from 'react-router-dom';
-// import Moment from 'react-moment';
-// import 'moment-timezone';
 
 const CommentSummary = ({ 
   comment: { date, _id, text, firstName, lastName, avatar, user }, 
-  userId, projId, auth, deleteComment }) => {
+    projId, auth, deleteComment }) => {
   return (
     <div>
       <div>
@@ -33,7 +31,6 @@ const CommentSummary = ({
 
 CommentSummary.propTypes = {
   comment: PropTypes.object.isRequired,
-  userId: PropTypes.string.isRequired,
   auth: PropTypes.object.isRequired,
   deleteComment: PropTypes.func.isRequired,
   projId: PropTypes.string.isRequired

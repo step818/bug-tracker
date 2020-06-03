@@ -12,7 +12,6 @@ import AddGoal from '../Projects/Goals/AddGoal';
 
 const ProjectDetails = ({ 
   project: { project, loading },
-  auth, 
   getProjectById,
   match 
 }) => {
@@ -84,7 +83,6 @@ const ProjectDetails = ({
 
 ProjectDetails.propTypes = {
   project: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
   getProjectById: PropTypes.func.isRequired
 };
 
