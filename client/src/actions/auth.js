@@ -109,3 +109,28 @@ export const logout = () => dispatch => {
     type: LOGOUT
   });
 };
+
+// Add Points
+export const addPoints = (userId, points) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  try {
+    const res = await axios.put(`/api/auth/points/${userId}`, points, config);
+
+    dispatch({
+      type: ADD_POINTS,
+      payload: res.data
+    });
+
+    dispatch(setAlert(`*${points} points added*`));
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};

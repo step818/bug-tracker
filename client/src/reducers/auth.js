@@ -52,7 +52,9 @@ export default function(state = initialState, action) {
     case ADD_POINTS:
       return {
         ...state,
-        user: state.user.points = state.user.points + payload
+        isAuthenticated: true,
+        user: state.user.points + payload,
+        loading: false
       };
     default:
       return state;

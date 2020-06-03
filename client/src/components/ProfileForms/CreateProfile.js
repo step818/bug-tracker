@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { createProfile } from '../../actions/profile';
 import { Link, withRouter } from 'react-router-dom';
+import { addPoints } from '../../actions/auth';
 
-const CreateProfile = ({ createProfile, history }) => {
+const CreateProfile = ({ auth: { user }, addPoints, createProfile, history }) => {
   const [formData, setFormData] = useState({
     company: '',
     location: '',
@@ -37,9 +38,10 @@ const CreateProfile = ({ createProfile, history }) => {
   
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value});
-
+  const reward = 7;
   const onSubmit = e => {
     e.preventDefault();
+    addPoints(user._id, reward);
     createProfile(formData, history);
   };
 
@@ -135,7 +137,12 @@ const CreateProfile = ({ createProfile, history }) => {
 
 CreateProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
-  
+  addPoints: PropTypes.func,
+  auth: PropTypes.object.isRequired
 };
 
-export default connect( null, { createProfile })(withRouter(CreateProfile));
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect( mapStateToProps , { addPoints, createProfile })(withRouter(CreateProfile));
