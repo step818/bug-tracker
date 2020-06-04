@@ -127,7 +127,7 @@ const CreateProfile = ({ auth: { user }, addPoints, createProfile, history }) =>
 
         
         <input type="submit" className="btn btn-primary my-1" />
-        <Link className="btn btn-light my-1" href="dashboard.html">
+        <Link to={'/dashboard'}>
           Go Back
         </Link>
       </form>
