@@ -17,7 +17,7 @@ const ProfileTop = ({
         alt=""
       />
       <h1>{firstName} {lastName}</h1>
-      <p>Profile: {points}</p>
+      <p>Points: {points}</p>
       <p>{status} {company && <span>at {company}</span>}</p>
       <p>{location && <span>{location}</span>}</p>
       <div>

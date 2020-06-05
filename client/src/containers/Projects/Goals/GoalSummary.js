@@ -9,7 +9,6 @@ const GoalSummary = ({
   goal: { date, _id, title, done, priority, description, status, user } }) => {
     const completeGoalReward = 2;
     const unDoGoalReward = -2;
-
   return (
     <div>
       <h2>{title}</h2>
@@ -18,12 +17,13 @@ const GoalSummary = ({
       <p>Status: {status}</p>
 
       <p>Completed: {!done ? (<span>False</span>) : (<span>True</span>)}</p>
-      <span type='button' onClick={e => {
+      {!auth.loading && (<span type='button' onClick={e => {
           if(!done){addPoints(auth.user._id, completeGoalReward); completeGoal(projId, _id);}
           else { addPoints(auth.user._id, unDoGoalReward); completeGoal(projId, _id);}
           }}>
         Done!
-      </span>
+      </span>)}
+      
       
       {!auth.loading && user === auth.user._id && (
           <button type='button' onClick={e => deleteGoal(projId, _id)}>

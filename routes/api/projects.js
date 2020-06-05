@@ -190,6 +190,7 @@ router.post(
         firstName: user.firstName,
         lastName: user.lastName,
         avatar: user.avatar,
+        points: user.points,
         user: req.user.id
       };
 
@@ -310,7 +311,7 @@ router.post(
 
 
     try {
-      const user = await User.findById(req.user.id).select('-password');
+      // const user = await User.findById(req.user.id).select('-password');
       const project = await Project.findById(req.params.id);
 
       const newGoal = {

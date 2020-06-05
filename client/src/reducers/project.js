@@ -67,8 +67,9 @@ export default function(state = initialState, action) {
     case ADD_GOAL:
       return{
         ...state,
-        project: {
-          goals: [payload, ...state.project.comments]},
+        project : { 
+          ...state.project, 
+          goals: payload},
         loading: false
       };
     case DELETE_GOAL:
