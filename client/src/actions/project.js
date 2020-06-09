@@ -142,7 +142,7 @@ export const addComment = (projId, formData) => async dispatch => {
       type: ADD_COMMENT,
       payload: res.data
     });
-
+    
     dispatch(setAlert('Comment added'));
   } catch (err) {
     dispatch({

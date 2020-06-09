@@ -97,7 +97,7 @@ export default function(state = initialState, action) {
         ...state,
         project : { 
           ...state.project, 
-          comments: [payload, ...state.project.comments]},
+          comments: payload},
         loading: false
       };
     case DELETE_COMMENT:

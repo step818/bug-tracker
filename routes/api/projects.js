@@ -311,7 +311,7 @@ router.post(
 
 
     try {
-      // const user = await User.findById(req.user.id).select('-password');
+      const user = await User.findById(req.user.id).select('-password');
       const project = await Project.findById(req.params.id);
 
       const newGoal = {
@@ -334,11 +334,11 @@ router.post(
       project.goals.unshift(newGoal);
 
       await project.save();
-
+      // The line below is the 'payload' we see in the reducer
       res.json(project.goals);
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server Error');
+      res.status(500).send('Server Error: Post Goal');
     }
 });
 

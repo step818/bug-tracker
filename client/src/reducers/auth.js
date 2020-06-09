@@ -53,7 +53,10 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: true,
-        user: state.user.points + payload,
+        user: {
+          ...state.user,
+          points: payload
+        },
         loading: false
       };
     default:
