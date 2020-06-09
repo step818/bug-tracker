@@ -6,7 +6,7 @@ import { addPoints } from '../../../actions/auth';
 
 const GoalSummary = ({ 
   projId, deleteGoal, completeGoal, addPoints, auth, 
-  goal: { date, _id, title, done, priority, description, status, user } }) => {
+  goal: { date, _id, title, done, priority, description, user } }) => {
     const completeGoalReward = 2;
     const unDoGoalReward = -2;
   return (
@@ -14,7 +14,6 @@ const GoalSummary = ({
       <h2>{title}</h2>
       <p>{description}</p>
       <b>Priority: {priority} / 10</b>
-      <p>Status: {status}</p>
 
       <p>Completed: {!done ? (<span>False</span>) : (<span>True</span>)}</p>
       {!auth.loading && (<span type='button' onClick={e => {

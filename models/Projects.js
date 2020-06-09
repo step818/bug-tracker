@@ -58,9 +58,6 @@ const ProjectSchema = new Schema({
       description: {
         type: String
       },
-      status: {
-        type: String
-      },
       done: {
         type: Boolean,
         default: false

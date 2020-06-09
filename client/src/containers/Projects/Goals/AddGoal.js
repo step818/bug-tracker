@@ -8,7 +8,6 @@ const AddGoal = ({ projId, addGoal, auth:{ user }, addPoints }) => {
   const [title, setTitle] = useState('');
   const [priority, setPrio] = useState('');
   const [description, setDesc] = useState('');
-  const [status, setStat] = useState('');
 
   const newGoalReward = 1;
 
@@ -21,8 +20,8 @@ const AddGoal = ({ projId, addGoal, auth:{ user }, addPoints }) => {
               onSubmit={e => {
                 e.preventDefault();
                 addPoints(user._id, newGoalReward);
-                addGoal( projId, { title, priority, description, status });
-                setTitle(''); setPrio(''); setDesc(''); setStat('');
+                addGoal( projId, { title, priority, description });
+                setTitle(''); setPrio(''); setDesc('');
               }}>
                 <input 
                   name="title" 
@@ -43,13 +42,6 @@ const AddGoal = ({ projId, addGoal, auth:{ user }, addPoints }) => {
                   value={description}
                   onChange={e => setDesc(e.target.value)}
                   placeholder="Write a short description">
-                </input>
-                <input 
-                  name="status" 
-                  value={status} 
-                  onChange={e => setStat(e.target.value)}
-                  placeholder="What's the status? ex: Open, In progress, Finished" 
-                  >
                 </input>
               <input type="submit" value="Submit" />
             </form>

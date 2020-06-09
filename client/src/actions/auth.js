@@ -127,8 +127,12 @@ export const addPoints = (userId, points) => async dispatch => {
       type: ADD_POINTS,
       payload: res.data
     });
-
-    dispatch(setAlert(`*${points} points added*`));
+    if(points > 0) {
+      dispatch(setAlert(`*${points} points added*`));
+    } else {
+      points = points*(-1)
+      dispatch(setAlert(`*${points} points subtracted*`));
+    }
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,

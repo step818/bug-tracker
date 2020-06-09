@@ -13,6 +13,7 @@ const ProfileItem = ({
   }
 }) => {
   return <div>
+    <h2>Profile Item</h2>
     <img src={avatar} alt="avatar"/>
     <div>
       <h2>{firstName + " " + lastName}</h2>

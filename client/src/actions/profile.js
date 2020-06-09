@@ -7,7 +7,8 @@ import {
   ACCOUNT_DELETED,
   CLEAR_PROFILE,
   GET_PROFILES,
-  GET_REPOS
+  GET_REPOS,
+  ADD_FRIEND
 } from './types';
 
 // Get current user's profile
@@ -52,6 +53,23 @@ export const getProfileById = (id) => async dispatch => {
 
     dispatch({
       type: GET_PROFILE,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+//  Add friend
+export const addFriend = (friend_id) => async dispatch => {
+  try {
+    const res = await axios.post(`/api/profile/friend/${friend_id}`);
+
+    dispatch({
+      type: ADD_FRIEND,
       payload: res.data
     });
   } catch (err) {

@@ -318,7 +318,6 @@ router.post(
         title: req.body.title,
         priority: req.body.priority,
         description: req.body.description,
-        status: req.body.status,
         user: req.user.id
       };
 
