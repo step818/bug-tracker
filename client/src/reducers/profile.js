@@ -3,7 +3,8 @@ import {
   GET_PROFILES, 
   GET_REPOS, 
   PROFILE_ERROR, 
-  CLEAR_PROFILE
+  CLEAR_PROFILE,
+  ADD_FRIEND
 } from "../actions/types";
 
 const initialState = {
@@ -28,6 +29,15 @@ export default function(state = initialState, action) {
       return {
         ...state,
         profiles: payload,
+        loading: false
+      };
+    case ADD_FRIEND:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          friends: payload
+        },
         loading: false
       };
     case GET_REPOS:

@@ -45,7 +45,21 @@ const ProfileSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  friends: [
+    {
+      friend: {
+        type: mongoose.Schema.Types.ObjectId
+      },
+      friendName: {
+        type: String
+      },
+      friendEmail: {
+        type: String,
+        unique: true
+      }
+    }
+  ]
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);
