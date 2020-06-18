@@ -42,7 +42,7 @@ export default function(state = initialState, action) {
           proj => proj._id === payload.projId ? {
             ...proj, 
             likes: payload.likes
-          } : proj),
+          } : proj ),
         loading: false
       };
     case PROJECT_ERROR:

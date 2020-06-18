@@ -34,10 +34,11 @@ export default function(state = initialState, action) {
     case ADD_FRIEND:
       return {
         ...state,
-        profile: {
-          ...state.profile,
-          friends: payload
-        },
+        profiles: state.profiles.map(
+          prof => prof._id === payload.friend_id ? {
+            ...prof,
+            friends: payload.friends
+          } : prof ),
         loading: false
       };
     case GET_REPOS:

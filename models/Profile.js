@@ -5,6 +5,14 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
   },
+  friends: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
+      }
+    }
+  ],
   company: {
     type: String
   },
@@ -45,21 +53,7 @@ const ProfileSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
-  },
-  friends: [
-    {
-      friend: {
-        type: mongoose.Schema.Types.ObjectId
-      },
-      friendName: {
-        type: String
-      },
-      friendEmail: {
-        type: String,
-        unique: true
-      }
-    }
-  ]
+  }
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);

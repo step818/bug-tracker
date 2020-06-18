@@ -66,11 +66,11 @@ export const getProfileById = (id) => async dispatch => {
 //  Add friend
 export const addFriend = (friend_id) => async dispatch => {
   try {
-    const res = await axios.post(`/api/profile/friend/${friend_id}`);
+    const res = await axios.put(`/api/profile/friend/${friend_id}`);
 
     dispatch({
       type: ADD_FRIEND,
-      payload: res.data
+      payload: {friend_id, friends: res.data }
     });
   } catch (err) {
     dispatch({

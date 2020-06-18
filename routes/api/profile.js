@@ -7,6 +7,7 @@ const { check, validationResult } = require('express-validator');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+// const { default: profile } = require('../../client/src/reducers/profile');
 
 //@route   Get api/profile/me
 //@desc    Get current users profile
@@ -149,7 +150,7 @@ router.get('/user/:user_id', async (req, res) => {
 //@access  Private
 router.delete('/', auth, async (req, res) => {
   try {
-    // @todo = remove users posts
+    // @todo = remove users projects
 
     // Remove profile
     await Profile.findOneAndRemove({ user : req.user.id });
@@ -187,6 +188,29 @@ router.get('/github/:username', (req, res) => {
 
       res.json(JSON.parse(body));
     });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//@route  PUT api/profile/friend/:id
+//@desc   Add a friend
+//@access Private
+router.put('/friend/:id', auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+
+    // Check if the profil has already been added by the user
+    if(profile.friends.filter(friend => friend.user.toString() === req.params.id).length > 0) {
+      return res.status(400).json({ msg: 'Profile already added '});
+    }
+
+    profile.friends.unshift({ user: req.params.id });
+
+    await profile.save();
+
+    res.json(profile.friends);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

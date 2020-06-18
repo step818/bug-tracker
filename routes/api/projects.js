@@ -247,45 +247,45 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
 //@route  Post api/projects/team
 //@desc   Join a team project
 //@access Private
-router.post(
-  '/team/:id',
-  [
-    auth, 
-    [
-      check('text', 'Text is required')
-      .not()
-      .isEmpty()
-    ]
-  ], 
-  async (req, res) => {
-    const errors = validationResult(req);
-    if(!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+// router.post(
+//   '/team/:id',
+//   [
+//     auth, 
+//     [
+//       check('text', 'Text is required')
+//       .not()
+//       .isEmpty()
+//     ]
+//   ], 
+//   async (req, res) => {
+//     const errors = validationResult(req);
+//     if(!errors.isEmpty()) {
+//       return res.status(400).json({ errors: errors.array() });
+//     }
 
 
-    try {
-      const user = await User.findById(req.user.id).select('-password');
-      const project = await Project.findById(req.params.id);
+//     try {
+//       const user = await User.findById(req.user.id).select('-password');
+//       const project = await Project.findById(req.params.id);
 
-      const newComment = {
-        text: req.body.text,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        avatar: user.avatar,
-        user: req.user.id
-      };
+//       const newComment = {
+//         text: req.body.text,
+//         firstName: user.firstName,
+//         lastName: user.lastName,
+//         avatar: user.avatar,
+//         user: req.user.id
+//       };
 
-      project.comments.unshift(newComment);
+//       project.comments.unshift(newComment);
 
-      await project.save();
+//       await project.save();
 
-      res.json(project.comments);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server Error');
-    }
-});
+//       res.json(project.comments);
+//     } catch (err) {
+//       console.error(err.message);
+//       res.status(500).send('Server Error');
+//     }
+// });
 
 //@route  Post api/projects/goal
 //@desc   Post a goal to a project
@@ -415,48 +415,48 @@ router.put('/goal/done/:id/:goal_id', auth, async (req, res) => {
 //@route  Post api/projects/team
 //@desc   Post team @todo Later make it so user INVITES team
 //@access Private
-router.post(
-  '/team/:id',
-  [
-    auth
-  ], 
-  async (req, res) => {
-    const errors = validationResult(req);
-    if(!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+// router.post(
+//   '/team/:id',
+//   [
+//     auth
+//   ], 
+//   async (req, res) => {
+//     const errors = validationResult(req);
+//     if(!errors.isEmpty()) {
+//       return res.status(400).json({ errors: errors.array() });
+//     }
 
 
-    try {
-      const user = await User.findById(req.user.id).select('-password');
-      const project = await Project.findById(req.params.id);
+//     try {
+//       const user = await User.findById(req.user.id).select('-password');
+//       const project = await Project.findById(req.params.id);
 
-      const newTeam = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        role: req.body.role,
-        user: req.user.id
-      };
+//       const newTeam = {
+//         firstName: req.body.firstName,
+//         lastName: req.body.lastName,
+//         role: req.body.role,
+//         user: req.user.id
+//       };
 
-      if (!project) {
-        return res.status(404).json({ msg: 'Project not found '});
-      }
+//       if (!project) {
+//         return res.status(404).json({ msg: 'Project not found '});
+//       }
   
-      // Check user of project is creating team
-      if (project.user.toString() !== req.user.id) {
-        return res.status(401).json({ msg: 'User not authorized to add goals to projects of other users' });
-      }
+//       // Check user of project is creating team
+//       if (project.user.toString() !== req.user.id) {
+//         return res.status(401).json({ msg: 'User not authorized to add goals to projects of other users' });
+//       }
 
-      project.team.unshift(newTeam);
+//       project.team.unshift(newTeam);
 
-      await project.save();
+//       await project.save();
 
-      res.json(project.team);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server Error');
-    }
-});
+//       res.json(project.team);
+//     } catch (err) {
+//       console.error(err.message);
+//       res.status(500).send('Server Error');
+//     }
+// });
 
 
 module.exports = router;
