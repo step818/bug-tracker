@@ -8,7 +8,8 @@ import {
   CLEAR_PROFILE,
   GET_PROFILES,
   GET_REPOS,
-  ADD_FRIEND
+  ADD_FRIEND,
+  SEND_REQUEST
 } from './types';
 
 // Get current user's profile
@@ -71,6 +72,23 @@ export const addFriend = (friend_id) => async dispatch => {
     dispatch({
       type: ADD_FRIEND,
       payload: {friend_id, friends: res.data }
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+//  Send friend requset
+export const sendRequest = (my_id) => async dispatch => {
+  try {
+    const res = await axios.put(`/api/profile/friendRequest/${my_id}`);
+
+    dispatch({
+      type: SEND_REQUEST,
+      payload: {my_id, requests: res.data }
     });
   } catch (err) {
     dispatch({

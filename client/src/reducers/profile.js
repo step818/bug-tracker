@@ -4,7 +4,8 @@ import {
   GET_REPOS, 
   PROFILE_ERROR, 
   CLEAR_PROFILE,
-  ADD_FRIEND
+  ADD_FRIEND,
+  SEND_REQUEST
 } from "../actions/types";
 
 const initialState = {
@@ -41,6 +42,10 @@ export default function(state = initialState, action) {
           } : prof ),
         loading: false
       };
+    case SEND_REQUEST:
+      return {
+        ...state
+      }
     case GET_REPOS:
       return {
         ...state,

@@ -201,11 +201,11 @@ router.put('/friend/:id', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
 
-    // Check if the profil has already been added by the user
+    // Check if the profile has already been added by the user
     if(profile.friends.filter(friend => friend.user.toString() === req.params.id).length > 0) {
       return res.status(400).json({ msg: 'Profile already added '});
     }
-
+    // Add friend
     profile.friends.unshift({ user: req.params.id });
 
     await profile.save();
@@ -216,5 +216,30 @@ router.put('/friend/:id', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+//@route  PUT api/profile//friendRequest/:id
+//@desc   Send a friend request
+//@access Private
+router.put('/friendRequest/:id', auth, async (req, res) => {
+  try {
+    // Find the profile that I want to send a request to
+    const friendProfile = await Profile.findOne({ user: req.params.id });
+
+    // Check if the profile has already been added by the user
+    // if(friendProfile.requests.filter(request => request.user.toString() === req.user.id).length > 0) {
+    //   return res.status(400).json({ msg: 'Profile already requested '});
+    // }
+
+    //Send request (my id) to that profile
+    friendProfile.requests.unshift({ user: req.user.id });
+
+    await friendProfile.save();
+
+    res.json(friendProfile.requests);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+})
 
 module.exports = router;

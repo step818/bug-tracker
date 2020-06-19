@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../../hoc/Layout/Spinner';
-import { getProfileById, addFriend } from '../../actions/profile';
+import { getProfileById, addFriend, sendRequest } from '../../actions/profile';
 import { Link } from 'react-router-dom';
 import ProfileTop from './ProfileTop';
 import ProfileGithub from './ProfileGithub';
@@ -25,7 +25,9 @@ const Profile = ({ addFriend, getProfileById, profile: { loading, profile }, aut
           {
             auth.isAuthenticated && !auth.loading && 
             auth.user._id !== profile.user._id &&
-            <button type='button' onClick={() => addFriend(profile.user._id)}>
+            <button type='button' onClick={
+                () => addFriend(profile.user._id),
+                () => sendRequest(auth.user._id)}>
               Add Friend
             </button>
           }
@@ -48,6 +50,7 @@ const Profile = ({ addFriend, getProfileById, profile: { loading, profile }, aut
 Profile.propTypes = {
   getProfileById: PropTypes.func.isRequired,
   addFriend: PropTypes.func.isRequired,
+  sendRequest: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -57,4 +60,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { getProfileById, addFriend })(Profile);
+export default connect(mapStateToProps, { getProfileById, addFriend, sendRequest })(Profile);
