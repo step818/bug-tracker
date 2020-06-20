@@ -1,19 +1,24 @@
 import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentProfile } from '../../actions/profile';
+import { getProfiles } from '../../actions/profile';
 import Spinner from '../../hoc/Layout/Spinner';
 
-const Friends = ({ getCurrentProfile, profile: { loading, profile }}) => {
+const Friends = ({ getProfiles, profile: { loading, profile, profiles }}) => {
   useEffect(() => {
-    getCurrentProfile();
-  }, [getCurrentProfile]);
+    getProfiles();
+  }, [getProfiles]);
   return loading && profile === null ? (
     <Spinner />
   ) : (
     <Fragment>
       <p>List of requests if there are any with addd friend button</p>
-      {profile.requests.length > 0 ? ( profile.requests.map(request => (request.user)) ) : (<p>No requests</p>)}
+      {
+        // I need to map out both, profiles, and the requests from the profile to check if the ids are equal,
+        // then display the profile that matches
+      }
+      {/* {profile.requests.length > 0 ? ( 
+        profile.requests.map(request => (request.user === profiles.user._id ? (<p></p>))) ) : (<p>No requests</p>)} */}
       <p>list of confirmed friends if there are any</p>
       {profile.friends.length > 0 ? ( profile.friends.map(friend => (friend.user)) ) : ( <p>No friends</p>)}
     </Fragment>
@@ -21,7 +26,7 @@ const Friends = ({ getCurrentProfile, profile: { loading, profile }}) => {
 }
 
 Friends.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
+  getProfiles: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 
@@ -29,4 +34,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(Friends);
+export default connect(mapStateToProps, { getProfiles })(Friends);

@@ -46,7 +46,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         profiles: state.profiles.map(
-          prof => prof.user._id === payload.friend_id ? {
+          prof => prof._id === payload.friend_id ? {
             ...prof,
             requests: payload.requests
           } : prof ),

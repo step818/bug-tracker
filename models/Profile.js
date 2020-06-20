@@ -7,17 +7,17 @@ const ProfileSchema = new mongoose.Schema({
   },
   requests: [
     {
-      user: {
+      profile: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'user'
       }
     }
   ],
   friends: [
     {
-      user: {
+      profile: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'user'
       }
     }
   ],
