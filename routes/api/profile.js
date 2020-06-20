@@ -224,11 +224,23 @@ router.put('/friendRequest/:id', auth, async (req, res) => {
   try {
     // Find the profile that I want to send a request to
     const friendProfile = await Profile.findOne({ user: req.params.id });
+    
+
+    //If user hasn't created a profile, then we get a Server error!!!
+    // But the button won't appear unless you have a profile, so the front end
+    // prevents the error from occuring.
 
     // Check if the profile has already been added by the user
-    // if(friendProfile.requests.filter(request => request.user.toString() === req.user.id).length > 0) {
-    //   return res.status(400).json({ msg: 'Profile already requested '});
+    // if(friendProfile.requests) {
+    //   if(friendProfile.requests.filter(request => request.user.toString() === req.user._id)) {
+    //     return res.status(400).json({ msg: 'Profile already requested '});
+    //   }
     // }
+    
+    // Check if the user is trying to request themself
+    if(req.params.id === req.user.id) {
+      return res.status(400).json({ msg: 'Cannot befriend yourself '});
+    }
 
     //Send request (my id) to that profile
     friendProfile.requests.unshift({ user: req.user.id });

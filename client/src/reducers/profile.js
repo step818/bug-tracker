@@ -36,7 +36,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         profiles: state.profiles.map(
-          prof => prof._id === payload.friend_id ? {
+          prof => prof.user._id === payload.friend_id ? {
             ...prof,
             friends: payload.friends
           } : prof ),
@@ -44,8 +44,14 @@ export default function(state = initialState, action) {
       };
     case SEND_REQUEST:
       return {
-        ...state
-      }
+        ...state,
+        profiles: state.profiles.map(
+          prof => prof.user._id === payload.friend_id ? {
+            ...prof,
+            requests: payload.requests
+          } : prof ),
+          loading: false
+      };
     case GET_REPOS:
       return {
         ...state,

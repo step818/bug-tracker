@@ -8,7 +8,7 @@ import ProfileTop from './ProfileTop';
 import ProfileGithub from './ProfileGithub';
 
 
-const Profile = ({ addFriend, getProfileById, profile: { loading, profile }, auth, match}) => {
+const Profile = ({ sendRequest, addFriend, getProfileById, profile: { loading, profile }, auth, match}) => {
   useEffect(() => {
     getProfileById(match.params.id);
   }, [getProfileById, match.params.id])
@@ -25,9 +25,7 @@ const Profile = ({ addFriend, getProfileById, profile: { loading, profile }, aut
           {
             auth.isAuthenticated && !auth.loading && 
             auth.user._id !== profile.user._id &&
-            <button type='button' onClick={
-                () => addFriend(profile.user._id),
-                () => sendRequest(auth.user._id)}>
+            <button type='button' onClick={() => sendRequest(profile.user._id)}>
               Add Friend
             </button>
           }

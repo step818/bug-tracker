@@ -82,13 +82,13 @@ export const addFriend = (friend_id) => async dispatch => {
 };
 
 //  Send friend requset
-export const sendRequest = (my_id) => async dispatch => {
+export const sendRequest = (friend_id) => async dispatch => {
   try {
-    const res = await axios.put(`/api/profile/friendRequest/${my_id}`);
+    const res = await axios.put(`/api/profile/friendRequest/${friend_id}`);
 
     dispatch({
       type: SEND_REQUEST,
-      payload: {my_id, requests: res.data }
+      payload: {friend_id, requests: res.data }
     });
   } catch (err) {
     dispatch({
