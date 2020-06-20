@@ -21,6 +21,7 @@ import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import Goals from './containers/Projects/Goals/Goals';
 import Comments from './containers/Projects/Comments/Comments';
+import Friends from './components/Friends/Friends';
 // Redux
 import { Provider} from 'react-redux';
 import store from './store';
@@ -46,6 +47,7 @@ const App = () => {
             <Route path='/login' component={Login} />
             <Route path='/profiles' component={Profiles} />
             <Route path='/profile/user/:id' component={Profile} />
+            <PrivateRoute path='/friends' component={Friends} />
             <PrivateRoute path='/project/comments/:id' component={Comments} />
             <PrivateRoute path='/project/goal/:id' component={Goals} />
             <PrivateRoute path='/project/team/:id' component={Team} />

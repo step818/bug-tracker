@@ -7,7 +7,7 @@ const ProfileTop = ({
     company,
     location,
     social,
-    user: { firstName, lastName, avatar, points }
+    user: { firstName, lastName, avatar }
   }
 }) => {
   return (
@@ -17,9 +17,8 @@ const ProfileTop = ({
         alt=""
       />
       <h1>{firstName} {lastName}</h1>
-      <p>Points: {points}</p>
-      <p>{status} {company && <span>at {company}</span>}</p>
-      <p>{location && <span>{location}</span>}</p>
+      <p>Status: {status} {company && <span>at {company}</span>}</p>
+      <p>{location && <span>Location: {location}</span>}</p>
       <div>
         {social && social.twitter && (
               <a href={social.twitter} target="_blank" rel="noopener noreferrer">

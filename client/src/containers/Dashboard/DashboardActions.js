@@ -8,6 +8,9 @@ const DashboardActions = () => {
         <Link to="/edit-profile">
           <p>Edit Profile</p> 
         </Link>
+        <Link to="/friends">
+          <p>Friends</p>
+        </Link>
       </div>
   );
 };
