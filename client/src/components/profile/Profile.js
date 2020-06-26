@@ -26,7 +26,7 @@ const Profile = ({ sendRequest, addFriend, getProfileById, profile: { loading, p
             auth.isAuthenticated && !auth.loading && 
             auth.user._id !== profile.user._id &&
             <button type='button' onClick={() => sendRequest(profile.user._id)}>
-              Add Friend
+              Send Friend Request
             </button>
           }
 

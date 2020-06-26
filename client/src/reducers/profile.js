@@ -45,12 +45,11 @@ export default function(state = initialState, action) {
     case SEND_REQUEST:
       return {
         ...state,
-        profiles: state.profiles.map(
-          prof => prof._id === payload.friend_id ? {
-            ...prof,
-            requests: payload.requests
-          } : prof ),
-          loading: false
+        loading: false,
+        profile: {
+          ...state.profile,
+          requests: payload.requests
+        }
       };
     case GET_REPOS:
       return {

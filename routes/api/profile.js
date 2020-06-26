@@ -224,6 +224,9 @@ router.put('/friendRequest/:id', auth, async (req, res) => {
   try {
     // Find the profile that I want to send a request to
     const friendProfile = await Profile.findOne({ user: req.params.id });
+    // const myProfile = await Profile.findOne({ user: req.user.id }).populate(
+    //   'user', ['firstName', 'lastName', 'avatar', 'points']
+    // );
 
     //If user hasn't created a profile, then we get a Server error!!!
     // But the button won't appear unless you have a profile, so the front end
@@ -242,7 +245,7 @@ router.put('/friendRequest/:id', auth, async (req, res) => {
     }
 
     //Send request (my id) to that profile
-    friendProfile.requests.unshift({ user: req.user.id });
+    friendProfile.requests.unshift({ profile: req.user.id });
 
     await friendProfile.save();
 
