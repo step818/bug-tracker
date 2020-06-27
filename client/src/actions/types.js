@@ -29,3 +29,4 @@ export const ADD_POINTS = 'ADD_POINTS';
 export const GOAL_DONE_UPDATE = 'GOAL_DONE_UPDATE';
 export const ADD_FRIEND = 'ADD_FRIEND';
 export const SEND_REQUEST = 'SEND_REQUEST';
+export const GET_FRIEND_REQUESTS = 'GET_FRIEND_REQUESTS';

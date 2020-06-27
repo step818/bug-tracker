@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfiles, getCurrentProfile } from '../../actions/profile';
 import Spinner from '../../hoc/Layout/Spinner';
-import ProfileItem from '../profiles/ProfileItem';
+import RequestItem from './RequestItem';
 
 const Friends = ({ getCurrentProfile, getProfiles, profile: { loading, profile, profiles }}) => {
   useEffect(() => {
@@ -14,13 +14,13 @@ const Friends = ({ getCurrentProfile, getProfiles, profile: { loading, profile, 
     <Spinner />
   ) : (
     <Fragment>
-      <p>List of requests if there are any with addd friend button</p>
+      <p>List of requests if there are any with add friend button</p>
       {
         // I need to map out both, profiles, and the requests from the profile to check if the ids are equal,
         // then display the profile that matches
       }
       {profile.requests.length > 0 ? ( 
-        profile.requests.map(request => (<p key={request._id}>{request.profile}</p>)) ) : (<p>No requests</p>)}
+        profile.requests.map(request => (<RequestItem key={request._id} userID={request.profile} />)) ) : (<p>No requests</p>)}
       
       {/* <p>list of confirmed friends if there are any</p>
       {profile.friends.length > 0 ? ( profile.friends.map(friend => (friend.user)) ) : ( <p>No friends</p>)} */}

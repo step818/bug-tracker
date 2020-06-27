@@ -9,7 +9,8 @@ import {
   GET_PROFILES,
   GET_REPOS,
   ADD_FRIEND,
-  SEND_REQUEST
+  SEND_REQUEST,
+  GET_FRIEND_REQUESTS
 } from './types';
 
 // Get current user's profile
@@ -105,6 +106,24 @@ export const getGithubRepos = username => async dispatch => {
 
     dispatch({
       type: GET_REPOS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Get profiles that requested to be my friend
+export const getRequestsProfiles = () => async dispatch => {
+  // dispatch({ type: CLEAR_PROFILE });
+  try {
+    const res = await axios.get('/api/profile');
+
+    dispatch({
+      type: GET_FRIEND_REQUESTS,
       payload: res.data
     });
   } catch (err) {

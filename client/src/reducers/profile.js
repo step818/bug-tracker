@@ -5,7 +5,8 @@ import {
   PROFILE_ERROR, 
   CLEAR_PROFILE,
   ADD_FRIEND,
-  SEND_REQUEST
+  SEND_REQUEST,
+  GET_FRIEND_REQUESTS
 } from "../actions/types";
 
 const initialState = {
@@ -31,6 +32,15 @@ export default function(state = initialState, action) {
         ...state,
         profiles: payload,
         loading: false
+      };
+    case GET_FRIEND_REQUESTS:
+      return {
+        ...state,
+        loading: false,
+        profiles: {
+          ...state.profiles,
+          
+        },
       };
     case ADD_FRIEND:
       return {

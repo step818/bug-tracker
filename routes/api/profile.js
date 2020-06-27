@@ -124,6 +124,21 @@ router.get('/', async (req, res) => {
   }
 });
 
+//@route   Get api/profile
+//@desc    Get profiles from requests
+//@access  Public
+router.get('/', async (req, res) => {
+  try {
+    const friendRequests = await Profile.find().populate(
+      'user', 
+      ['firstName', 'lastName', 'avatar', 'points']);
+    res.json(friendRequests);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 //@route   Get api/profile/user/:user_id
 //@desc    Get profile by user ID
 //@access  Public
