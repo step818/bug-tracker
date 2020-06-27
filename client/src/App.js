@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-// import Auth from './containers/Auth/Auth';
 import Dashboard from './containers/Dashboard/Dashboard';
 import Layout from './hoc/Layout/Layout';
 import { Switch, Route } from 'react-router-dom';

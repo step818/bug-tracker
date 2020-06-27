@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 const ProfileTop = ({
   profile: {
+    bio,
     status,
     company,
     location,
@@ -17,6 +18,7 @@ const ProfileTop = ({
         alt=""
       />
       <h1>{firstName} {lastName}</h1>
+      <p>Bio: {bio}</p>
       <p>Status: {status} {company && <span>at {company}</span>}</p>
       <p>{location && <span>Location: {location}</span>}</p>
       <div>

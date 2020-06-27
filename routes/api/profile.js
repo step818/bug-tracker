@@ -147,6 +147,7 @@ router.get('/user/:user_id', async (req, res) => {
     const profile = await Profile.findOne({ 
       user: req.params.user_id 
     }).populate('user', ['firstName', 'lastName', 'avatar', 'points']);
+    // 
     
     if(!profile) return res.status(400).json({ msg: 'Profile not found' });
     
@@ -243,16 +244,16 @@ router.put('/friendRequest/:id', auth, async (req, res) => {
     //   'user', ['firstName', 'lastName', 'avatar', 'points']
     // );
 
-    //If user hasn't created a profile, then we get a Server error!!!
+    // If user hasn't created a profile, then we get a Server error!!!
     // But the button won't appear unless you have a profile, so the front end
     // prevents the error from occuring.
 
     // Check if the profile has already been added by the user
-    // if(friendProfile.requests) {
-    //   if(friendProfile.requests.filter(request => request.user.toString() === req.user._id)) {
-    //     return res.status(400).json({ msg: 'Profile already requested '});
-    //   }
-    // }
+    if(friendProfile.requests) {
+      if(friendProfile.requests.filter(requ => requ.profile === req.user.id)) {
+        return res.status(400).json({ msg: 'Profile already requested '});
+      }
+    }
     
     // Check if the user is trying to request themself
     if(req.params.id === req.user.id) {

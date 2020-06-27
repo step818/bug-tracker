@@ -74,6 +74,8 @@ export const addFriend = (friend_id) => async dispatch => {
       type: ADD_FRIEND,
       payload: {friend_id, friends: res.data }
     });
+
+    dispatch(setAlert('Added new friend'));
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
@@ -91,6 +93,8 @@ export const sendRequest = (friend_id) => async dispatch => {
       type: SEND_REQUEST,
       payload: {friend_id, requests: res.data }
     });
+
+    dispatch(setAlert('Friend request sent'));
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
