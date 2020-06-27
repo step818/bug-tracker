@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfiles } from '../../actions/profile';
 
-const RequestItem = ({ userID, getProfiles, profile: {profiles, profile} }) => {
+const RequestItem = ({ userID, getProfiles, profile: {profiles} }) => {
   useEffect(() => {
     getProfiles();
   }, [getProfiles]);
 
       return(<Fragment>
-          <h2>Request Item</h2>
+          <h2>Request</h2>
           {/* <img src={avatar} alt="avatar"/> */}
             {/* <h2>{firstName + " " + lastName}</h2>
             <p>{status} {company && <span> at {company}</span>}</p>
@@ -19,7 +19,8 @@ const RequestItem = ({ userID, getProfiles, profile: {profiles, profile} }) => {
             {profiles.map( prof => {
               if (prof.user._id === userID) {
                 return(<Fragment>
-                  <p>{prof.user.firstName}</p>
+                  <img src={prof.user.avatar} alt="avatar"/>
+                  <h2>{prof.user.firstName + ' ' + prof.user.lastName}</h2>
                   <Link to={`profile/user/${userID}`}>
                     View Profile
                   </Link>

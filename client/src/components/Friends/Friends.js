@@ -20,7 +20,7 @@ const Friends = ({ getCurrentProfile, getProfiles, profile: { loading, profile, 
         // then display the profile that matches
       }
       {profile.requests.length > 0 ? ( 
-        profile.requests.map(request => (<RequestItem key={request._id} userID={request.profile} />)) ) : (<p>No requests</p>)}
+        profile.requests.map(request => (<RequestItem key={request._id} userID={request.profile} allProfiles={profiles}/>)) ) : (<p>No requests</p>)}
       
       {/* <p>list of confirmed friends if there are any</p>
       {profile.friends.length > 0 ? ( profile.friends.map(friend => (friend.user)) ) : ( <p>No friends</p>)} */}
