@@ -18,7 +18,6 @@ const Dashboard = ({ auth, getCurrentProfile, deleteAccount, profile: { profile,
     <Fragment>
       <h1>Dashboard</h1>
       <h3>Welcome {auth.user.firstName}</h3>
-      <p>Pebbles: {auth.user.points}</p>
       {profile !== null ? (
         <Fragment>
           <DashboardActions/>

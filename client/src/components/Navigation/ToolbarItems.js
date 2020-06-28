@@ -3,10 +3,11 @@ import ToolbarItem from './Item/ToolbarItem';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
+import classes from './ToolbarItems.module.css';
 
 const toolbarItems = ({auth: { isAuthenticated, loading }, logout}) => {
   const authLinks = (
-    <ul>
+    <ul className={classes.ToolbarItems}>
       <li><ToolbarItem link="/dashboard" exact>Home</ToolbarItem></li>
       <li><ToolbarItem link="/projects">Projects</ToolbarItem></li>
       <li><ToolbarItem link="/addProject">Add Project</ToolbarItem></li>
