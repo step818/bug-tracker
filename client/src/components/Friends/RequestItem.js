@@ -2,9 +2,9 @@ import React, { useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getProfiles } from '../../actions/profile';
+import { getProfiles, removeRequest } from '../../actions/profile';
 
-const RequestItem = ({ userID, getProfiles, profile: {profiles} }) => {
+const RequestItem = ({ key, userID, getProfiles, removeRequest, profile: {profiles} }) => {
   useEffect(() => {
     getProfiles();
   }, [getProfiles]);
@@ -24,8 +24,10 @@ const RequestItem = ({ userID, getProfiles, profile: {profiles} }) => {
                   <Link to={`profile/user/${userID}`}>
                     View Profile
                   </Link>
-                  </Fragment>
-                )
+                  <button type='button' onClick={e => removeRequest(key)}>
+                    Remove request
+                  </button>
+                </Fragment>)
               }
             })}
           </div>
@@ -38,6 +40,7 @@ const RequestItem = ({ userID, getProfiles, profile: {profiles} }) => {
 };
 
 RequestItem.propTypes = {
+  removeRequest: PropTypes.func.isRequired,
   getProfiles: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
@@ -46,4 +49,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, { getProfiles })(RequestItem);
+export default connect(mapStateToProps, { getProfiles, removeRequest })(RequestItem);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import classes from './ProfileItem.module.css';
 
 const ProfileItem = ({
   profile: {
@@ -12,7 +12,7 @@ const ProfileItem = ({
     skills
   }
 }) => {
-  return <div>
+  return <div className={classes.ProfileItem}>
     <h2>Profile Item</h2>
     <img src={avatar} alt="avatar"/>
     <div>

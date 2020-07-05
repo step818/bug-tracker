@@ -10,7 +10,8 @@ import {
   GET_REPOS,
   ADD_FRIEND,
   SEND_REQUEST,
-  GET_FRIEND_REQUESTS
+  GET_FRIEND_REQUESTS,
+  REMOVE_REQUEST
 } from './types';
 
 // Get current user's profile
@@ -95,6 +96,25 @@ export const sendRequest = (friend_id) => async dispatch => {
     });
 
     dispatch(setAlert('Friend request sent'));
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+//  Delete friend requset
+export const removeRequest = (request_id) => async dispatch => {
+  try {
+    await axios.delete(`/api/profile/friendRequest/${request_id}`);
+
+    dispatch({
+      type: REMOVE_REQUEST,
+      payload: {request_id}
+    });
+
+    dispatch(setAlert('Friend request has been removed'));
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,

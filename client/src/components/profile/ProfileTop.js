@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classes from './ProfileTop.module.css';
 
 const ProfileTop = ({
   profile: {
@@ -12,7 +13,7 @@ const ProfileTop = ({
   }
 }) => {
   return (
-    <div>
+    <div className={classes.ProfileTop}>
       <img
         src={avatar}
         alt=""

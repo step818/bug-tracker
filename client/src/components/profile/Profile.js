@@ -6,6 +6,7 @@ import { getProfileById, addFriend, sendRequest } from '../../actions/profile';
 import { Link } from 'react-router-dom';
 import ProfileTop from './ProfileTop';
 import ProfileGithub from './ProfileGithub';
+import classes from './Profile.module.css';
 
 
 const Profile = ({ sendRequest, addFriend, getProfileById, profile: { loading, profile }, auth, match}) => {
@@ -15,32 +16,34 @@ const Profile = ({ sendRequest, addFriend, getProfileById, profile: { loading, p
 
   return (
     <Fragment>
-      {profile===null || loading ? <Spinner/> : 
-        <Fragment>
-          <div>
-            <ProfileTop profile={profile} />
-          </div>
-          <Link to="/profiles">Back to Profiles</Link>
+      <div className={classes.Profile}>
+        {profile===null || loading ? <Spinner/> : 
+          <Fragment>
+            <div>
+              <ProfileTop profile={profile} />
+            </div>
+            <Link to="/profiles">Back to Profiles</Link>
 
-          {
-            auth.isAuthenticated && !auth.loading && 
-            auth.user._id !== profile.user._id &&
-            <button type='button' onClick={() => sendRequest(profile.user._id)}>
-              Send Friend Request
-            </button>
-          }
+            {
+              auth.isAuthenticated && !auth.loading && 
+              auth.user._id !== profile.user._id &&
+              <button type='button' onClick={() => sendRequest(profile.user._id)}>
+                Send Friend Request
+              </button>
+            }
 
-          { auth.isAuthenticated && !auth.loading && 
-            auth.user._id === profile.user._id && 
-            <Link to="/edit-profile">
-              Edit Profile
-            </Link>
-          }
+            { auth.isAuthenticated && !auth.loading && 
+              auth.user._id === profile.user._id && 
+              <Link to="/edit-profile">
+                Edit Profile
+              </Link>
+            }
 
-          {profile.githubusername && (
-            <ProfileGithub username={profile.githubusername} />
-          )}
-        </Fragment>}
+            {profile.githubusername && (
+              <ProfileGithub username={profile.githubusername} />
+            )}
+          </Fragment>}
+      </div>
     </Fragment>
   );
 };
