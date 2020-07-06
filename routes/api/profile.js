@@ -270,6 +270,32 @@ router.put('/friendRequest/:id', auth, async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-})
+});
+
+//@route  PUT api/profile/friendrequest/:id
+//@desc   Remove a friend request
+//@access Private
+router.put('/friends/:id', auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id }).populate(
+      'user',
+      ['firstName', 'lastName', 'avatar','points']
+    );
+    // Get remove index
+    const removeIndex = profile.requests
+      .map(rek => rek.profile)
+      .indexOf(req.params.id);
+
+
+    profile.requests.splice(removeIndex, 1);
+
+    await profile.save();
+
+    res.json(profile.requests);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;

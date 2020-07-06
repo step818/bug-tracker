@@ -6,7 +6,8 @@ import {
   CLEAR_PROFILE,
   ADD_FRIEND,
   SEND_REQUEST,
-  GET_FRIEND_REQUESTS
+  GET_FRIEND_REQUESTS,
+  REMOVE_REQUEST
 } from "../actions/types";
 
 const initialState = {
@@ -60,6 +61,13 @@ export default function(state = initialState, action) {
           ...state.profile,
           requests: payload.requests
         }
+      };
+    case REMOVE_REQUEST:
+      return {
+        ...state,
+        profile: state.profile.requests.filter(
+          reQu => reQu.profile === payload.request_id),
+        loading: false
       };
     case GET_REPOS:
       return {

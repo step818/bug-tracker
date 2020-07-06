@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfiles, removeRequest } from '../../actions/profile';
 
-const RequestItem = ({ key, userID, getProfiles, removeRequest, profile: {profiles} }) => {
+const RequestItem = ({ userID, getProfiles, removeRequest, profile: {profiles} }) => {
   useEffect(() => {
     getProfiles();
   }, [getProfiles]);
@@ -18,16 +18,18 @@ const RequestItem = ({ key, userID, getProfiles, removeRequest, profile: {profil
           <div>
             {profiles.map( prof => {
               if (prof.user._id === userID) {
-                return(<Fragment>
+                return(<div key={prof._id}>
                   <img src={prof.user.avatar} alt="avatar"/>
                   <h2>{prof.user.firstName + ' ' + prof.user.lastName}</h2>
                   <Link to={`profile/user/${userID}`}>
                     View Profile
                   </Link>
-                  <button type='button' onClick={e => removeRequest(key)}>
+                  <button type='button' onClick={e => removeRequest(userID)}>
                     Remove request
                   </button>
-                </Fragment>)
+                </div>)
+              } else {
+                return null;
               }
             })}
           </div>

@@ -104,14 +104,14 @@ export const sendRequest = (friend_id) => async dispatch => {
   }
 };
 
-//  Delete friend requset
+//  Remove friend requset
 export const removeRequest = (request_id) => async dispatch => {
   try {
-    await axios.delete(`/api/profile/friendRequest/${request_id}`);
+    const res = await axios.put(`/api/profile/friends/${request_id}`);
 
     dispatch({
       type: REMOVE_REQUEST,
-      payload: {request_id}
+      payload: { request_id, requests: res.data }
     });
 
     dispatch(setAlert('Friend request has been removed'));
