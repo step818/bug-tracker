@@ -1,3 +1,7 @@
 .ToolbarItem {
-  border: solid 1px goldenrod;
+  border: solid 3px rgb(2, 1, 1);
+  margin: 10px 0;
+  box-sizing: border-box;
+  display:block;
+  width: 100%;
 }

@@ -1,3 +1,6 @@
 .Toolbar {
-  border: solid goldenrod 2px;
+  border: solid rgb(219, 185, 97) 5px;
+  background-color: goldenrod;
+  border-radius: 10px 100px / 120px;
+  height: 100px;
 }
