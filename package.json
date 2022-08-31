@@ -27,7 +27,7 @@
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.26.0",
-    "moment-timezone": "^0.5.31",
+    "moment-timezone": "^0.5.35",
     "mongoose": "^5.9.10",
     "react-moment": "^0.9.7",
     "request": "^2.88.2",
